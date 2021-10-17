@@ -11,7 +11,7 @@ class Home extends StatelessWidget {
     return Scaffold(
       backgroundColor: MyColors.color1,
       appBar: AppBar(
-      title: Text('SplitCost'),
+      title: Text('Clinico'),
       backgroundColor: MyColors.color2, 
       elevation: 0.0,
       actions: <Widget>[
@@ -22,7 +22,7 @@ class Home extends StatelessWidget {
               backgroundColor: MaterialStateProperty.all(MyColors.color3),
           ),
           //
-          label: Text('Wyloguj się'),
+          label: Text('Sign out'),
           onPressed: () async {
             await _auth.signOut();
           },

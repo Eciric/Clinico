@@ -27,15 +27,15 @@ class _RegisterState extends State<Register> {
   @override
   Widget build(BuildContext context) {
     return loading ? Loading() : Scaffold(
-      backgroundColor: MyColors.color1,
+      backgroundColor: MyColors.steelTeal,
       appBar: AppBar(
-        backgroundColor: MyColors.color2,
+        backgroundColor: MyColors.darkSkyBlue,
         elevation: 0.0,
         title: Text('Sign up Clinico'),
         actions: <Widget>[
           ElevatedButton.icon(
             style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.all(MyColors.color2),
+              backgroundColor: MaterialStateProperty.all(MyColors.darkSkyBlue),
             ),
             icon: Icon(Icons.person),
             label: Text('Sign in'),
@@ -71,11 +71,11 @@ class _RegisterState extends State<Register> {
               SizedBox(height: 20.0,),
               ElevatedButton(
                 style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(MyColors.color2),
+                  backgroundColor: MaterialStateProperty.all(MyColors.darkSkyBlue),
                 ),
                 child: Text(
                   'Sign up',
-                  style: TextStyle(color: MyColors.color3),
+                  style: TextStyle(color: Colors.white),
                 ),
                 onPressed: () async {
                   if(_formKey.currentState.validate()){

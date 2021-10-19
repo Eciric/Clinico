@@ -27,25 +27,15 @@ class _SignInState extends State<SignIn> {
   @override
   Widget build(BuildContext context) {
     return loading ? Loading() : Scaffold(
+      resizeToAvoidBottomInset: true,
       backgroundColor: MyColors.color1,
       appBar: AppBar(
         backgroundColor: MyColors.color2,
         elevation: 0.0,
         title: Text('Sign in Clinico'),
-        actions: <Widget>[
-          ElevatedButton.icon(
-            style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.all(MyColors.color2),
-            ),
-            icon: Icon(Icons.person),
-            label: Text('Sign up'),
-            onPressed: () {
-              widget.toggleView();
-            },
-          ),
-        ],
       ),
-      body: Container(
+      body: SingleChildScrollView(
+        child: Container(
         padding: EdgeInsets.symmetric(vertical: 20, horizontal: 50),
         child: Form(
           key: _formKey,
@@ -74,7 +64,7 @@ class _SignInState extends State<SignIn> {
               ),
               SizedBox(height: 20.0),
               TextFormField(
-                decoration: MyDecoration.textInputDecoration.copyWith(hintText: 'Email'),
+                decoration: MyDecoration.textInputDecoration.copyWith(hintText: 'Email',icon: Icon(Icons.person)),
                 validator: (val) => val.isEmpty ? 'Type email' : null,
                 onChanged: (val) {
                   setState(() => email = val);
@@ -82,7 +72,7 @@ class _SignInState extends State<SignIn> {
               ),
               SizedBox(height: 20.0),
               TextFormField(
-                decoration: MyDecoration.textInputDecoration.copyWith(hintText: 'Password'),
+                decoration: MyDecoration.textInputDecoration.copyWith(hintText: 'Password',icon: Icon(Icons.lock)),
                 obscureText: true,
                 validator: (val) => val.length < 6 ? 'Password 6+ char' : null,
                 onChanged: (val) {
@@ -118,10 +108,31 @@ class _SignInState extends State<SignIn> {
                   color: MyColors.error,
                   fontSize: 14.0,
                 ),
+              ),
+              SizedBox(height: 12.0,),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Text(
+                    'Don t have account ?',
+                    style: TextStyle(color: MyColors.color3),
+                  ),
+                  GestureDetector(
+                  onTap: () {widget.toggleView();},
+                  child: Text(
+                    'Sign up',
+                    style: TextStyle(
+                      color: MyColors.color3, 
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  )
+                ],
               )
             ],
           ),
         ),
+      ),
       ),
     );
   }

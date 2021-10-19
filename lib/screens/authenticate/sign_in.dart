@@ -28,11 +28,23 @@ class _SignInState extends State<SignIn> {
   Widget build(BuildContext context) {
     return loading ? Loading() : Scaffold(
       resizeToAvoidBottomInset: true,
-      backgroundColor: MyColors.color1,
+      backgroundColor: MyColors.steelTeal,
       appBar: AppBar(
-        backgroundColor: MyColors.color2,
+        backgroundColor: MyColors.darkSkyBlue,
         elevation: 0.0,
         title: Text('Sign in Clinico'),
+        actions: <Widget>[
+          ElevatedButton.icon(
+            style: ButtonStyle(
+              backgroundColor: MaterialStateProperty.all(MyColors.darkSkyBlue),
+            ),
+            icon: Icon(Icons.person),
+            label: Text('Sign up'),
+            onPressed: () {
+              widget.toggleView();
+            },
+          ),
+        ],
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -46,7 +58,7 @@ class _SignInState extends State<SignIn> {
                 'Login to Clinico',
                 style: TextStyle(
                   fontSize: 35,
-                  color: MyColors.color3,
+                  color: Colors.white,
                 ),
                 ),
               SizedBox(height: 20.0),
@@ -82,11 +94,11 @@ class _SignInState extends State<SignIn> {
               SizedBox(height: 20.0,),
               ElevatedButton(
                 style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(MyColors.color2),
+                  backgroundColor: MaterialStateProperty.all(MyColors.darkSkyBlue),
                 ),
                 child: Text(
                   'Sing in',
-                  style: TextStyle(color: MyColors.color3),
+                  style: TextStyle(color: Colors.white),
                 ),
                 onPressed: () async {
                   if(_formKey.currentState.validate()){
@@ -115,14 +127,14 @@ class _SignInState extends State<SignIn> {
                 children: <Widget>[
                   Text(
                     'Don t have account ?',
-                    style: TextStyle(color: MyColors.color3),
+                    style: TextStyle(color: MyColors.darkSkyBlue),
                   ),
                   GestureDetector(
                   onTap: () {widget.toggleView();},
                   child: Text(
                     'Sign up',
                     style: TextStyle(
-                      color: MyColors.color3, 
+                      color: MyColors.darkSkyBlue, 
                       fontWeight: FontWeight.bold,
                     ),
                   ),

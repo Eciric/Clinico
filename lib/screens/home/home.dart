@@ -9,17 +9,17 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: MyColors.color1,
+      backgroundColor: MyColors.steelTeal,
       appBar: AppBar(
       title: Text('Clinico'),
-      backgroundColor: MyColors.color2, 
+      backgroundColor: MyColors.darkSkyBlue, 
       elevation: 0.0,
       actions: <Widget>[
         TextButton.icon(
           icon: Icon(Icons.person), 
           //
           style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.all(MyColors.color3),
+              backgroundColor: MaterialStateProperty.all(Colors.white),
           ),
           //
           label: Text('Sign out'),

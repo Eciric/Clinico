@@ -39,18 +39,6 @@ class _RegisterState extends State<Register> {
         backgroundColor: MyColors.darkSkyBlue,
         elevation: 0.0,
         title: Text('Sign up Clinico'),
-        actions: <Widget>[
-          ElevatedButton.icon(
-            style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.all(MyColors.darkSkyBlue),
-            ),
-            icon: Icon(Icons.person),
-            label: Text('Sign in'),
-            onPressed: () {
-              widget.toggleView();
-            },
-          ),
-        ],
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -169,14 +157,14 @@ class _RegisterState extends State<Register> {
                 children: <Widget>[
                   Text(
                     'Do you have account ?',
-                    style: TextStyle(color: MyColors.darkSkyBlue),
+                    style: TextStyle(color: Colors.white),
                   ),
                   GestureDetector(
                   onTap: () {widget.toggleView();},
                   child: Text(
                     'Sign in',
                     style: TextStyle(
-                      color: MyColors.darkSkyBlue, 
+                      color: Colors.white, 
                       fontWeight: FontWeight.bold,
                     ),
                   ),

@@ -1,5 +1,22 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.clinico">
+    <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES"/>
+<!-- to dodalem  -->
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <data android:scheme="https" />
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.DIAL" />
+            <data android:scheme="tel" />
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.SEND" />
+            <data android:mimeType="*/*" />
+        </intent>
+    </queries>
+    <!-- tu skonczylem -->
    <application
         android:label="clinico"
         android:icon="@mipmap/ic_launcher">

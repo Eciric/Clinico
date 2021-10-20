@@ -1,3 +1,4 @@
+import 'package:clinico/screens/about/about.dart';
 import 'package:clinico/screens/calendar/calendar.dart';
 import 'package:clinico/screens/info/info.dart';
 import 'package:clinico/screens/receipt/receiptview.dart';
@@ -18,21 +19,37 @@ class Home extends StatelessWidget {
       title: Text('Clinico'),
       backgroundColor: MyColors.darkSkyBlue, 
       elevation: 0.0,
-      actions: <Widget>[
-        TextButton.icon(
-          icon: Icon(Icons.person,color: Colors.white,), 
-          //
-          style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.all(MyColors.darkSkyBlue),
-              
-          ),
-          //
-          label: Text('Sign out',style: TextStyle(color: Colors.white),),
-          onPressed: () async {
-            await _auth.signOut();
-          },
+      ),
+      drawer: new Drawer(
+        child: ListView(
+          children: [
+            new ListTile(
+              tileColor: MyColors.darkSkyBlue,
+              leading: Icon(Icons.info,color: Colors.white,),
+              title: new Text('About Page'),
+              onTap: (){Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => About()),
+                  );},
+              trailing: Wrap(
+                children: <Widget>[
+                  Icon(Icons.arrow_forward), // icon-1
+                ],
+              ),
+            ),
+            new ListTile(
+              tileColor: MyColors.darkSkyBlue,
+              leading: Icon(Icons.person,color: Colors.white,),
+              title: new Text('Sign out'),
+              onTap: () async {await _auth.signOut();},
+              trailing: Wrap(
+                children: <Widget>[
+                  Icon(Icons.arrow_forward), // icon-1
+                ],
+              ),
+            ),
+          ],
         ),
-      ],
       ),
       body: Container(
         padding: EdgeInsets.symmetric(vertical: 20, horizontal: 50),

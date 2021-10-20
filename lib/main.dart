@@ -1,3 +1,4 @@
+import 'package:clinico/style/colors.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -19,6 +20,9 @@ class MyApp extends StatelessWidget {
       value: AuthService().user,
       initialData: null,
       child: MaterialApp(
+        theme: new ThemeData(
+          canvasColor: MyColors.steelTeal,
+        ),
         home: Wrapper(),
       ),
     );

@@ -44,14 +44,7 @@ class _SignInState extends State<SignIn> {
                       SizedBox(
                         height: 20.0,
                       ),
-                      Text(
-                        'Login to Clinico',
-                        style: TextStyle(
-                          fontSize: 35,
-                          color: Colors.white,
-                        ),
-                      ),
-                      SizedBox(height: 20.0),
+                      SizedBox(height: 0.0),
                       Container(
                         height: 150.0,
                         width: 150.0,
@@ -64,6 +57,14 @@ class _SignInState extends State<SignIn> {
                         ),
                       ),
                       SizedBox(height: 20.0),
+                      Text(
+                        'Login to Clinico',
+                        style: TextStyle(
+                          fontSize: 35,
+                          color: Colors.white,
+                        ),
+                      ),
+                      SizedBox(height: 50.0),
                       TextFormField(
                         style: TextStyle(color: Colors.white, fontSize: 20),
                         decoration: MyDecoration.textInputDecoration.copyWith(

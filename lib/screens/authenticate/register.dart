@@ -48,14 +48,6 @@ class _RegisterState extends State<Register> {
                   child: Column(
                     children: <Widget>[
                       SizedBox(height: 20.0),
-                      Text(
-                        'Register to Clinico',
-                        style: TextStyle(
-                          fontSize: 35,
-                          color: Colors.white,
-                        ),
-                      ),
-                      SizedBox(height: 20.0),
                       Container(
                         height: 150.0,
                         width: 150.0,
@@ -68,6 +60,14 @@ class _RegisterState extends State<Register> {
                         ),
                       ),
                       SizedBox(height: 20.0),
+                      Text(
+                        'Register to Clinico',
+                        style: TextStyle(
+                          fontSize: 35,
+                          color: Colors.white,
+                        ),
+                      ),
+                      SizedBox(height: 40.0),
                       TextFormField(
                         style: TextStyle(color: Colors.white, fontSize: 20),
                         decoration: MyDecoration.textInputDecoration.copyWith(
@@ -103,7 +103,7 @@ class _RegisterState extends State<Register> {
                       TextFormField(
                         style: TextStyle(color: Colors.white, fontSize: 20),
                         decoration: MyDecoration.textInputDecoration.copyWith(
-                          hintText: 'Confirm password',
+                          hintText: 'Password',
                           suffixIcon: Padding(
                               padding: EdgeInsets.symmetric(horizontal: 20),
                               child: Icon(Icons.lock,

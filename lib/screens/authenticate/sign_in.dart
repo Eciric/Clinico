@@ -67,23 +67,12 @@ class _SignInState extends State<SignIn> {
                       TextFormField(
                         style: TextStyle(color: Colors.white, fontSize: 20),
                         decoration: MyDecoration.textInputDecoration.copyWith(
-                            hintText: 'Email',
-                            hintStyle:
-                                TextStyle(color: Colors.white, fontSize: 20),
-                            contentPadding: EdgeInsets.symmetric(
-                                vertical: 20, horizontal: 35),
-                            //contentPadding: const EdgeInsets.all(20.0),
-                            fillColor: Color(0x508991),
-                            suffixIcon: Icon(
-                              Icons.person,
-                              color: Colors.white,
-                            ),
-                            //icon: Icon(Icons.person),
-                            enabledBorder: OutlineInputBorder(
-                              borderSide:
-                                  BorderSide(width: 2, color: Colors.white),
-                              borderRadius: BorderRadius.circular(90),
-                            )),
+                          hintText: 'Email',
+                          suffixIcon: Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 20),
+                              child: Icon(Icons.person,
+                                  color: Colors.white, size: 35.0)),
+                        ),
                         validator: (val) => val.isEmpty ? 'Type email' : null,
                         onChanged: (val) {
                           setState(() => email = val);
@@ -91,15 +80,14 @@ class _SignInState extends State<SignIn> {
                       ),
                       SizedBox(height: 20.0),
                       TextFormField(
+                        style: TextStyle(color: Colors.white, fontSize: 20),
                         decoration: MyDecoration.textInputDecoration.copyWith(
-                            hintText: 'Password',
-                            fillColor: Color(0x508991),
-                            icon: Icon(Icons.lock),
-                            enabledBorder: OutlineInputBorder(
-                              borderSide:
-                                  BorderSide(width: 2, color: Colors.white),
-                              borderRadius: BorderRadius.circular(90),
-                            )),
+                          hintText: 'Password',
+                          suffixIcon: Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 20),
+                              child: Icon(Icons.lock,
+                                  color: Colors.white, size: 35.0)),
+                        ),
                         obscureText: true,
                         validator: (val) =>
                             val.length < 6 ? 'Password 6+ char' : null,
@@ -111,12 +99,23 @@ class _SignInState extends State<SignIn> {
                         height: 20.0,
                       ),
                       ElevatedButton(
-                        style: ButtonStyle(
-                          backgroundColor:
-                              MaterialStateProperty.all(MyColors.darkSkyBlue),
-                        ),
+                        style: /* ElevatedButton.styleFrom(
+                            minimumSize: const Size(200, 50),
+                            maximumSize: const Size(200, 50),
+                            background), */
+                            ButtonStyle(
+                                backgroundColor: MaterialStateProperty.all(
+                                    MyColors.darkSkyBlue),
+                                shape: MaterialStateProperty.all(
+                                    RoundedRectangleBorder(
+                                        side: BorderSide(
+                                            color: Colors.white,
+                                            width: 1,
+                                            style: BorderStyle.solid),
+                                        borderRadius:
+                                            BorderRadius.circular(90.0)))),
                         child: Text(
-                          'Sing in',
+                          'Login',
                           style: TextStyle(color: Colors.white),
                         ),
                         onPressed: () async {
@@ -150,7 +149,7 @@ class _SignInState extends State<SignIn> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
                           Text(
-                            'Don t have account ?',
+                            "Don't have an account? ",
                             style: TextStyle(color: Colors.white),
                           ),
                           GestureDetector(

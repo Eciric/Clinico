@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-abstract class MyColors{
+abstract class MyColors {
   static var error = Colors.red;
   static var darkSkyBlue = Color.fromRGBO(116, 179, 206, 1);
   static var steelTeal = Color.fromRGBO(80, 137, 145, 1);

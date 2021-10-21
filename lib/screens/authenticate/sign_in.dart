@@ -99,24 +99,24 @@ class _SignInState extends State<SignIn> {
                         height: 20.0,
                       ),
                       ElevatedButton(
-                        style: /* ElevatedButton.styleFrom(
-                            minimumSize: const Size(200, 50),
-                            maximumSize: const Size(200, 50),
-                            background), */
-                            ButtonStyle(
-                                backgroundColor: MaterialStateProperty.all(
-                                    MyColors.darkSkyBlue),
-                                shape: MaterialStateProperty.all(
-                                    RoundedRectangleBorder(
-                                        side: BorderSide(
-                                            color: Colors.white,
-                                            width: 1,
-                                            style: BorderStyle.solid),
-                                        borderRadius:
-                                            BorderRadius.circular(90.0)))),
+                        style: ButtonStyle(
+                            maximumSize:
+                                MaterialStateProperty.all(Size(300, 60)),
+                            minimumSize:
+                                MaterialStateProperty.all(Size(300, 60)),
+                            backgroundColor:
+                                MaterialStateProperty.all(MyColors.darkSkyBlue),
+                            shape: MaterialStateProperty.all(
+                                RoundedRectangleBorder(
+                                    side: BorderSide(
+                                        color: Colors.white,
+                                        width: 1,
+                                        style: BorderStyle.solid),
+                                    borderRadius:
+                                        BorderRadius.circular(90.0)))),
                         child: Text(
                           'Login',
-                          style: TextStyle(color: Colors.white),
+                          style: TextStyle(color: Colors.white, fontSize: 30),
                         ),
                         onPressed: () async {
                           if (_formKey.currentState.validate()) {

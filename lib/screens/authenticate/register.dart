@@ -110,9 +110,18 @@ class _RegisterState extends State<Register> {
                                   color: Colors.white, size: 35.0)),
                         ),
                         obscureText: true,
-                        validator: (val) => val != password
+                        // ignore: missing_return
+                        validator: (val) {
+                          if (val != password) {
+                            return 'Password must be the same';
+                          } else if (val.length < 6) {
+                            return 'Type Password 6+ chars';
+                          } else
+                            return null;
+                        },
+                        /* validator: (val) => val != password
                             ? 'Password must be the same'
-                            : null,
+                            : null, */
                         onChanged: (val) {
                           setState(() => password2 = val);
                         },

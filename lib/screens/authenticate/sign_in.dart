@@ -70,7 +70,7 @@ class _SignInState extends State<SignIn> {
                         decoration: MyDecoration.textInputDecoration.copyWith(
                           hintText: 'Email',
                           suffixIcon: Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 20),
+                              padding: EdgeInsets.only(right: 20),
                               child: Icon(Icons.person,
                                   color: Colors.white, size: 35.0)),
                         ),

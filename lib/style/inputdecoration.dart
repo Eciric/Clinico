@@ -6,7 +6,7 @@ abstract class MyDecoration {
     hintStyle: TextStyle(color: Colors.white, fontSize: 20),
     fillColor: MyColors.steelTeal,
     filled: true,
-    contentPadding: EdgeInsets.symmetric(vertical: 20, horizontal: 30),
+    contentPadding: EdgeInsets.only(left: 20, top: 40),
     enabledBorder: OutlineInputBorder(
         borderSide: BorderSide(width: 1, color: Colors.white),
         borderRadius: BorderRadius.circular(90)),

@@ -8,6 +8,7 @@ class DatabaseService {
   // collection reference
   final CollectionReference userCollection = FirebaseFirestore.instance.collection('myUser');
   final CollectionReference doctorsCollection = FirebaseFirestore.instance.collection('doctors');
+  final CollectionReference specializatonCollection = FirebaseFirestore.instance.collection('specialization');
 
   Future updateUserData(String userName, String uid, String phoneNumber, String email, String pesel, String surname) async {
     return await userCollection.doc(uid).set({
@@ -24,11 +25,17 @@ class DatabaseService {
     return await doctorsCollection.doc(uid).set({
       'name' : userName,
       'surname' : surname,
-      'userId' : doctorid,
+      'doctorId' : doctorid,
       'phoneNumber' : phoneNumber,
     });
   }
-  
+
+  Future updateSpecialization(String specializationName, String specid) async {
+    return await specializatonCollection.doc(uid).set({
+      'specializationId' : specid,
+      'specializationName' : specializationName,
+    });
+  }
 
   Future checPeselNumber(String pesel) async {
     QuerySnapshot result = await userCollection.where('pesel', isEqualTo: pesel).get();

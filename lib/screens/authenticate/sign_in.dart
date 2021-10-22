@@ -29,11 +29,6 @@ class _SignInState extends State<SignIn> {
         : Scaffold(
             resizeToAvoidBottomInset: true,
             backgroundColor: MyColors.steelTeal,
-            appBar: AppBar(
-              backgroundColor: MyColors.darkSkyBlue,
-              elevation: 0.0,
-              title: Text('Sign in Clinico'),
-            ),
             body: SingleChildScrollView(
               child: Container(
                 padding: EdgeInsets.symmetric(vertical: 20, horizontal: 70),
@@ -41,10 +36,7 @@ class _SignInState extends State<SignIn> {
                   key: _formKey,
                   child: Column(
                     children: <Widget>[
-                      SizedBox(
-                        height: 20.0,
-                      ),
-                      SizedBox(height: 0.0),
+                      SizedBox(height: 60.0),
                       Container(
                         height: 150.0,
                         width: 150.0,
@@ -101,8 +93,6 @@ class _SignInState extends State<SignIn> {
                       ),
                       ElevatedButton(
                         style: ButtonStyle(
-                            maximumSize:
-                                MaterialStateProperty.all(Size(300, 60)),
                             minimumSize:
                                 MaterialStateProperty.all(Size(300, 60)),
                             backgroundColor:

@@ -2,6 +2,7 @@ import 'package:clinico/screens/about/about.dart';
 import 'package:clinico/screens/calendar/calendar.dart';
 import 'package:clinico/screens/info/info.dart';
 import 'package:clinico/screens/receipt/receiptview.dart';
+import 'package:clinico/screens/visit/doctors.dart';
 import 'package:clinico/screens/visit/visitone.dart';
 import 'package:flutter/material.dart';
 import 'package:clinico/services/auth.dart';
@@ -14,6 +15,7 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       backgroundColor: MyColors.steelTeal,
       appBar: AppBar(
       title: Text('Clinico'),
@@ -51,7 +53,8 @@ class Home extends StatelessWidget {
           ],
         ),
       ),
-      body: Container(
+      body: SingleChildScrollView(
+        child: Container(
         padding: EdgeInsets.symmetric(vertical: 20, horizontal: 50),
         child: Column(
           children: <Widget>[
@@ -83,7 +86,7 @@ class Home extends StatelessWidget {
                 GestureDetector(
                   onTap: (){Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => Visitone()),
+                    MaterialPageRoute(builder: (context) => DoctorsView()),
                   );},
                   child:Container(
                     height: 110,
@@ -148,6 +151,7 @@ class Home extends StatelessWidget {
             ),
           ],
           ),
+      ),
       ),
     );
   }

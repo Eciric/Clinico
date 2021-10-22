@@ -35,11 +35,6 @@ class _RegisterState extends State<Register> {
         : Scaffold(
             resizeToAvoidBottomInset: true,
             backgroundColor: MyColors.steelTeal,
-            appBar: AppBar(
-              backgroundColor: MyColors.darkSkyBlue,
-              elevation: 0.0,
-              title: Text('Sign up Clinico'),
-            ),
             body: SingleChildScrollView(
               child: Container(
                 padding: EdgeInsets.symmetric(vertical: 20, horizontal: 50),
@@ -47,7 +42,7 @@ class _RegisterState extends State<Register> {
                   key: _formKey,
                   child: Column(
                     children: <Widget>[
-                      SizedBox(height: 20.0),
+                      SizedBox(height: 60.0),
                       Container(
                         height: 150.0,
                         width: 150.0,
@@ -193,8 +188,6 @@ class _RegisterState extends State<Register> {
                       ),
                       ElevatedButton(
                         style: ButtonStyle(
-                            maximumSize:
-                                MaterialStateProperty.all(Size(300, 60)),
                             minimumSize:
                                 MaterialStateProperty.all(Size(300, 60)),
                             backgroundColor:

@@ -67,7 +67,7 @@ class Home extends StatelessWidget {
           height: (MediaQuery.of(context).size.height),
           decoration: BoxDecoration(
             image: DecorationImage(
-                image: AssetImage("assets/images/main_background.png"),
+                image: AssetImage("assets/images/dashboard_background.png"),
                 fit: BoxFit.fill),
           ),
           child: SingleChildScrollView(
@@ -75,9 +75,6 @@ class Home extends StatelessWidget {
               padding: EdgeInsets.symmetric(vertical: 20, horizontal: 50),
               child: Column(
                 children: <Widget>[
-                  SizedBox(
-                    height: 10,
-                  ),
                   Text(
                     'Dashboard',
                     style: TextStyle(
@@ -92,12 +89,12 @@ class Home extends StatelessWidget {
                     height: 150.0,
                     width: 150.0,
                     decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: AssetImage('assets/images/logo.jpg'),
-                        fit: BoxFit.fill,
-                      ),
-                      shape: BoxShape.circle,
-                    ),
+                        image: DecorationImage(
+                          image: AssetImage('assets/images/logo.jpg'),
+                          fit: BoxFit.fill,
+                        ),
+                        shape: BoxShape.circle,
+                        border: Border.all(width: 2, color: Colors.white)),
                   ),
                   SizedBox(height: 50),
                   Row(
@@ -115,7 +112,7 @@ class Home extends StatelessWidget {
                           height: 130,
                           width: 130,
                           decoration: new BoxDecoration(
-                            color: MyColors.warmBlack,
+                            color: MyColors.warmBlack.withOpacity(0.85),
                             shape: BoxShape.circle,
                             border: Border.all(width: 3, color: Colors.white),
                           ),
@@ -141,7 +138,7 @@ class Home extends StatelessWidget {
                           height: 130,
                           width: 130,
                           decoration: new BoxDecoration(
-                              color: MyColors.prussianBlue,
+                              color: MyColors.prussianBlue.withOpacity(0.85),
                               shape: BoxShape.circle,
                               border:
                                   Border.all(width: 3, color: Colors.white)),
@@ -171,7 +168,7 @@ class Home extends StatelessWidget {
                           height: 130,
                           width: 130,
                           decoration: new BoxDecoration(
-                              color: MyColors.mountainMeadow,
+                              color: MyColors.mountainMeadow.withOpacity(0.85),
                               border: Border.all(width: 3, color: Colors.white),
                               image: DecorationImage(
                                 image:
@@ -195,7 +192,7 @@ class Home extends StatelessWidget {
                           height: 130,
                           width: 130,
                           decoration: new BoxDecoration(
-                              color: MyColors.darkSkyBlue,
+                              color: MyColors.darkSkyBlue.withOpacity(0.85),
                               border: Border.all(width: 3, color: Colors.white),
                               image: DecorationImage(
                                 image: AssetImage('assets/images/location.png'),

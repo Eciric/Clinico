@@ -4,7 +4,7 @@ import 'package:clinico/style/colors.dart';
 abstract class MyDecoration {
   static var textInputDecoration = InputDecoration(
     hintStyle: TextStyle(color: Colors.white, fontSize: 20),
-    fillColor: MyColors.steelTeal,
+    fillColor: MyColors.steelTeal.withOpacity(0.4),
     filled: true,
     contentPadding: EdgeInsets.only(left: 20, top: 40),
     enabledBorder: OutlineInputBorder(

@@ -50,8 +50,7 @@ flutter:
     - assets/images/doctor.jpg
     - assets/images/plus_icon.png
     - assets/images/location.png
-    - assets/images/rysunek.svg
-    - assets/images/rysunek.png
+    - assets/images/main_background.png
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in

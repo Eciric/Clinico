@@ -27,10 +27,17 @@ class _SignInState extends State<SignIn> {
     return loading
         ? Loading()
         : Scaffold(
-            resizeToAvoidBottomInset: true,
+            resizeToAvoidBottomInset: false,
             backgroundColor: MyColors.steelTeal,
-            body: SingleChildScrollView(
-              child: Container(
+            body: Container(
+              width: (MediaQuery.of(context).size.width),
+              height: (MediaQuery.of(context).size.height),
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage("assets/images/main_background.png"),
+                    fit: BoxFit.fill),
+              ),
+              child: SingleChildScrollView(
                 padding: EdgeInsets.symmetric(vertical: 20, horizontal: 70),
                 child: Form(
                   key: _formKey,
@@ -41,12 +48,12 @@ class _SignInState extends State<SignIn> {
                         height: 150.0,
                         width: 150.0,
                         decoration: BoxDecoration(
-                          image: DecorationImage(
-                            image: AssetImage('assets/images/logo.jpg'),
-                            fit: BoxFit.fill,
-                          ),
-                          shape: BoxShape.circle,
-                        ),
+                            image: DecorationImage(
+                              image: AssetImage('assets/images/logo.jpg'),
+                              fit: BoxFit.fill,
+                            ),
+                            shape: BoxShape.circle,
+                            border: Border.all(width: 2, color: Colors.white)),
                       ),
                       SizedBox(height: 20.0),
                       Text(
@@ -95,8 +102,8 @@ class _SignInState extends State<SignIn> {
                         style: ButtonStyle(
                             minimumSize:
                                 MaterialStateProperty.all(Size(300, 60)),
-                            backgroundColor:
-                                MaterialStateProperty.all(MyColors.darkSkyBlue),
+                            backgroundColor: MaterialStateProperty.all(
+                                MyColors.darkSkyBlue.withOpacity(0.5)),
                             shape: MaterialStateProperty.all(
                                 RoundedRectangleBorder(
                                     side: BorderSide(
@@ -135,6 +142,9 @@ class _SignInState extends State<SignIn> {
                       ),
                       SizedBox(
                         height: 12.0,
+                        child: Align(
+                          alignment: FractionalOffset.bottomCenter,
+                        ),
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,

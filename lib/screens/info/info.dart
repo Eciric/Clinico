@@ -55,12 +55,12 @@ class Info extends StatelessWidget {
                     color: Colors.white,
                   ),
                 ),
-                Text(
-                  '-----------------------------------',
-                  style: TextStyle(
-                    fontSize: 22,
-                    color: Colors.white,
-                  ),
+                const Divider(
+                  color: Colors.white,
+                  height: 25,
+                  thickness: 2,
+                  indent: 5,
+                  endIndent: 5,
                 ),
                 SizedBox(height: 30.0),
                 Text(
@@ -112,16 +112,8 @@ class Info extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 20.0),
-                Center(
-                  child: Text(
-                    '------------------------------------------\nScroll down to see map\n------------------------------------------\n',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 26,
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
+               
+               
                 SizedBox(height: 25.0),
                 Padding(
                   padding: EdgeInsets.only(bottom: 10),

@@ -2,6 +2,7 @@ import 'package:clinico/screens/about/about.dart';
 import 'package:clinico/screens/calendar/calendar.dart';
 import 'package:clinico/screens/info/info.dart';
 import 'package:clinico/screens/receipt/receiptview.dart';
+import 'package:clinico/screens/settings/settings.dart';
 import 'package:clinico/screens/visit/doctors.dart';
 import 'package:clinico/screens/visit/visitone.dart';
 import 'package:flutter/material.dart';
@@ -35,6 +36,25 @@ class Home extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => About()),
+                  );
+                },
+                trailing: Wrap(
+                  children: <Widget>[
+                    Icon(Icons.arrow_forward), // icon-1
+                  ],
+                ),
+              ),
+              new ListTile(
+                tileColor: MyColors.darkSkyBlue,
+                leading: Icon(
+                  Icons.settings,
+                  color: Colors.white,
+                ),
+                title: new Text('Settings'),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => SettingsView()),
                   );
                 },
                 trailing: Wrap(
@@ -83,7 +103,7 @@ class Home extends StatelessWidget {
                     ),
                   ),
                   SizedBox(
-                    height: 15,
+                    height: 5,
                   ),
                   Container(
                     height: 150.0,
@@ -96,7 +116,7 @@ class Home extends StatelessWidget {
                         shape: BoxShape.circle,
                         border: Border.all(width: 2, color: Colors.white)),
                   ),
-                  SizedBox(height: 50),
+                  SizedBox(height: 35),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -109,12 +129,12 @@ class Home extends StatelessWidget {
                           );
                         },
                         child: Container(
-                          height: 130,
-                          width: 130,
+                          height: 115,
+                          width: 115,
                           decoration: new BoxDecoration(
                             color: MyColors.warmBlack.withOpacity(0.85),
                             shape: BoxShape.circle,
-                            border: Border.all(width: 3, color: Colors.white),
+                            border: Border.all(width: 2, color: Colors.white),
                           ),
                           child: Icon(
                             Icons.person,
@@ -123,36 +143,10 @@ class Home extends StatelessWidget {
                           ),
                         ),
                       ),
-                      SizedBox(
-                        width: 30,
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => ReceiptView()),
-                          );
-                        },
-                        child: Container(
-                          height: 130,
-                          width: 130,
-                          decoration: new BoxDecoration(
-                              color: MyColors.prussianBlue.withOpacity(0.85),
-                              shape: BoxShape.circle,
-                              border:
-                                  Border.all(width: 3, color: Colors.white)),
-                          child: Icon(
-                            Icons.settings,
-                            color: Colors.grey,
-                            size: 100,
-                          ),
-                        ),
-                      ),
                     ],
                   ),
                   SizedBox(
-                    height: 30,
+                    height: 15,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -165,11 +159,11 @@ class Home extends StatelessWidget {
                           );
                         },
                         child: Container(
-                          height: 130,
-                          width: 130,
+                          height: 115,
+                          width: 115,
                           decoration: new BoxDecoration(
                               color: MyColors.mountainMeadow.withOpacity(0.85),
-                              border: Border.all(width: 3, color: Colors.white),
+                              border: Border.all(width: 2, color: Colors.white),
                               image: DecorationImage(
                                 image:
                                     AssetImage('assets/images/plus_icon.png'),
@@ -189,11 +183,11 @@ class Home extends StatelessWidget {
                           );
                         },
                         child: Container(
-                          height: 130,
-                          width: 130,
+                          height: 115,
+                          width: 115,
                           decoration: new BoxDecoration(
                               color: MyColors.darkSkyBlue.withOpacity(0.85),
-                              border: Border.all(width: 3, color: Colors.white),
+                              border: Border.all(width: 2, color: Colors.white),
                               image: DecorationImage(
                                 image: AssetImage('assets/images/location.png'),
                               ),

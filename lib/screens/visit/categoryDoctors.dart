@@ -1,3 +1,4 @@
+import 'package:clinico/screens/visit/pickDate.dart';
 import 'package:clinico/services/database.dart';
 import 'package:clinico/style/colors.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -19,6 +20,22 @@ class _CategoryDoctorsState extends State<CategoryDoctors> {
         backgroundColor: MyColors.darkSkyBlue,
         elevation: 0.0,
         title: Text("2/4 Pick a Specialization from list"),
+        actions: [
+          TextButton(
+            style: ButtonStyle(backgroundColor: MaterialStateProperty. all(MyColors.mountainMeadow),
+            ),
+            onPressed: (){Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => PickDate(),));},
+            child: Text(
+              'Go Next',
+              style: TextStyle(
+                fontSize: 20,
+                color: Colors.white,
+              ),
+            )
+          ),
+        ],
       ),
       floatingActionButton: null,
         body: StreamBuilder(

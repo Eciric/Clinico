@@ -65,9 +65,9 @@ class DatabaseService {
       bool confirmed,
       bool reminded,
       String issue,
-      int appointment_date,
-      int created_date) async {
-    return await appointmentCollection.doc(uid).set({
+      DateTime appointment_date,
+      DateTime created_date) async {
+    return await appointmentCollection.doc("5").set({
       'user_id': user_id,
       'appointment_id': appointment_id,
       'doctor_id': doctor_id,

@@ -16,13 +16,10 @@ String issue = "Boli mnie brzuszek i nie mogę chodzić.";
 DateTime appointment_date = DateTime.now();
 DateTime created_date = DateTime.now();
 
-int numberOfAppointments = 0;
-
 class Appointments extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     //RESETING VARIABLE
-    numberOfAppointments = 0;
     return Container(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
@@ -66,8 +63,6 @@ class Appointments extends StatelessWidget {
                       return ListView(
                         padding: EdgeInsets.only(top: 20),
                         children: snapshot.data.docs.map((document) {
-                          //Titles has numbers from 1 to .... Appointment#1..2...3
-                          numberOfAppointments += 1;
                           //final doctors = snapshot2.data;
                           String current_doctor = "a";
                           snapshot2.data.docs.forEach((document2) {
@@ -113,7 +108,7 @@ class Appointments extends StatelessWidget {
                                   children: [
                                     Text(
                                       //snapshot.data.docs.length
-                                      'Appointment #${numberOfAppointments}',
+                                      'Appointment #${document['appointment_id']}',
                                       style: TextStyle(
                                           color: Colors.white, fontSize: 18),
                                     ),

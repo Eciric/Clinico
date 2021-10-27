@@ -1,28 +1,5 @@
 import 'package:clinico/style/colors.dart';
 import 'package:flutter/material.dart';
-/*
-class Info extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-        width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height,
-        decoration: BoxDecoration(
-            image: DecorationImage(
-          image: AssetImage('assets/images/main_background.png'),
-          fit: BoxFit.fill,
-        )),
-        child: Container(
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              scale: 0.2,
-              image: AssetImage('assets/images/mapa2.png'),
-            ),
-          ),
-        ));
-  }
-}
-*/
 
 class Info extends StatelessWidget {
   @override
@@ -112,8 +89,6 @@ class Info extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 20.0),
-               
-               
                 SizedBox(height: 25.0),
                 Padding(
                   padding: EdgeInsets.only(bottom: 10),

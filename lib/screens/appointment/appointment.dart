@@ -1,3 +1,4 @@
+import 'package:clinico/screens/details/details.dart';
 import 'package:clinico/style/colors.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:clinico/services/database.dart';
@@ -156,8 +157,15 @@ class Appointments extends StatelessWidget {
                                               color: Colors.white,
                                               fontSize: 24),
                                         ),
-                                        onPressed: () async {
-                                          Navigator.pop(context);
+                                        onPressed: () {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) => Details(
+                                                    doctor: current_doctor,
+                                                    dateWithHours: dateDisplay,
+                                                    issue: document['issue'])),
+                                          );
                                         }),
                                   ],
                                 ),

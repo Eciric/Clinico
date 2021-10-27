@@ -80,6 +80,7 @@ class Appointments extends StatelessWidget {
                           //String current_doctor = doctors.docs.last['name'];
                           //String current_doctor =
                           //Converting date
+                          //print('test')
 
                           Timestamp temp = document['appointment_date'];
                           DateTime date = temp.toDate();

@@ -1,5 +1,5 @@
 import 'package:clinico/screens/about/about.dart';
-import 'package:clinico/screens/calendar/calendar.dart';
+import 'package:clinico/screens/appointment/appointment.dart';
 import 'package:clinico/screens/info/info.dart';
 import 'package:clinico/screens/receipt/receiptview.dart';
 import 'package:clinico/screens/settings/settings.dart';
@@ -155,7 +155,8 @@ class Home extends StatelessWidget {
                         onTap: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => Calendar()),
+                            MaterialPageRoute(
+                                builder: (context) => Appointments()),
                           );
                         },
                         child: Container(

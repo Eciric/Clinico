@@ -30,24 +30,6 @@ class _PickDateState extends State<PickDate> {
     }
   }
 
-  String getDateText(){
-    if(date == null){
-      return 'Select Date';
-    } else {
-      return '${date.month}/${date.day}/${date.year}';
-    }
-  }
-
-  String getTimeText(){
-    if(time == null){
-      return 'Select Time';
-    } else {
-      final hours = time.hour.toString().padLeft(2,'0');
-      final minutes = time.minute.toString().padLeft(2,'0');
-      return '${hours}:${minutes}';
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
   return Scaffold(
@@ -78,16 +60,6 @@ class _PickDateState extends State<PickDate> {
       ),
       body:Column(
         children: [
-          ButtonHeaderWidget(
-            title: 'Date',
-            text: getDateText(),
-            onClicked: () => pickDate(context)
-          ),
-          ButtonHeaderWidget(
-            title: 'Time',
-            text: getTimeText(),
-            onClicked: () => pickTime(context)
-          ),
           HeaderWidget(title: 'Date Range',
           child: Row (children: [
             Expanded(
@@ -101,27 +73,6 @@ class _PickDateState extends State<PickDate> {
         ],
       ),
     );
-  }
-
-
-  Future pickDate(BuildContext context) async {
-    final initialDate = DateTime.now();
-    final newDate = await showDatePicker(
-      context: context, initialDate: date ?? initialDate, firstDate: DateTime(DateTime.now().year -5 ), lastDate: DateTime(DateTime.now().year +5) 
-      );
-    if(newDate == null) return;
-    setState(() {
-          date = newDate;
-        });
-  } 
-
-  Future pickTime(BuildContext context) async {
-    final initialTime = TimeOfDay(hour: 9, minute: 0);
-    final newTime = await showTimePicker(context: context,initialTime: time ?? initialTime);
-    if(newTime == null) return;
-    setState(() {
-          time = newTime;
-        });
   }
 
   Future pickDateRange(BuildContext context) async {

@@ -44,27 +44,28 @@ class _CategoryDoctorsState extends State<CategoryDoctors> {
           if(!snapshot.hasData){
             return Center(
               child: CircularProgressIndicator(),
-            );
+            ); 
           }
           return ListView(
             children: snapshot.data.docs.map((document) {
-              return Center(
-                child: Column(
-                  children: [
-                    SizedBox(height: 15.0,),
-                    Row(
-                      children: [
-                        SizedBox(width: 30.0,),
-                        Row(children: [
-                            Text("Specialization: ",style:  TextStyle(color: Colors.white,fontSize: 20),),
-                            Text(document['specializationName'],style:  TextStyle(color: Colors.white,fontSize: 20,fontWeight: FontWeight.bold),)
-                          ],),
-                      ],
-                    ),
-                    SizedBox(height: 15.0,),
-                  ],
-                ),
-              );
+              return Category(name: document['specializationName']);
+              // return Center(
+              //   child: Column(
+              //     children: [
+              //       SizedBox(height: 15.0,),
+              //       Row(
+              //         children: [
+              //           SizedBox(width: 30.0,),
+              //           Row(children: [
+              //               Text("Specialization: ",style:  TextStyle(color: Colors.white,fontSize: 20),),
+              //               Text(document['specializationName'],style:  TextStyle(color: Colors.white,fontSize: 20,fontWeight: FontWeight.bold),)
+              //             ],),
+              //         ],
+              //       ),
+              //       SizedBox(height: 15.0,),
+              //     ],
+              //   ),
+              // );
             }).toList(),
           );
         },
@@ -72,3 +73,41 @@ class _CategoryDoctorsState extends State<CategoryDoctors> {
     );
   }
 }
+ class Category extends StatefulWidget {
+   final String name;
+
+   Category({this.name});
+ 
+   @override
+   _CategoryState createState() => _CategoryState();
+ }
+ 
+ class _CategoryState extends State<Category> {
+   bool selected = true;
+   @override
+   Widget build(BuildContext context) {
+          return Center(
+            child: Column(
+            children: [
+              SizedBox(height: 15.0,),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SizedBox(width: 30.0,),
+                  Row(children: [
+                  Text(widget.name??"test",style:  TextStyle(color: Colors.white,fontSize: 20,fontWeight: FontWeight.bold),),
+                  Checkbox(
+                    activeColor: MyColors.mountainMeadow,
+                    value: selected ?? true,
+                    onChanged: (bool val){
+                    setState(() { selected = val;});
+                  },),
+                ],),
+              ],
+            ),
+            SizedBox(height: 15.0,),
+        ],
+      ),
+    );
+   }
+ }

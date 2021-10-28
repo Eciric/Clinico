@@ -52,7 +52,111 @@ class _DoctorsViewState extends State<DoctorsView> {
           }
           return ListView(
             children: snapshot.data.docs.map((document) {
-              return Center(
+              return Doctor(name: document['name'],surname: document['surname'],phone: document['phoneNumber'],);
+              // return Center(
+              //   child: Column(
+              //     children: [
+              //       SizedBox(
+              //         height: 15.0,
+              //       ),
+              //       Row(
+              //         children: [
+              //           SizedBox(
+              //             width: 30.0,
+              //           ),
+              //           Container(
+              //             height: 80.0,
+              //             width: 80.0,
+              //             decoration: BoxDecoration(
+              //               image: DecorationImage(
+              //                 image: AssetImage('assets/images/doctor.jpg'),
+              //                 fit: BoxFit.fill,
+              //               ),
+              //               shape: BoxShape.circle,
+              //             ),
+              //           ),
+              //           SizedBox(
+              //             width: 20.0,
+              //           ),
+              //           Column(
+              //             crossAxisAlignment: CrossAxisAlignment.start,
+              //             children: [
+              //               Row(
+              //                 children: [
+              //                   Text(
+              //                     "Name: ",
+              //                     style: TextStyle(
+              //                         color: Colors.white, fontSize: 20),
+              //                   ),
+              //                   Text(
+              //                     document['name'],
+              //                     style: TextStyle(
+              //                         color: Colors.white,
+              //                         fontSize: 20,
+              //                         fontWeight: FontWeight.bold),
+              //                   )
+              //                 ],
+              //               ),
+              //               Row(
+              //                 children: [
+              //                   Text(
+              //                     "Surname: ",
+              //                     style: TextStyle(
+              //                         color: Colors.white, fontSize: 20),
+              //                   ),
+              //                   Text(
+              //                     document['surname'],
+              //                     style: TextStyle(
+              //                         color: Colors.white,
+              //                         fontSize: 20,
+              //                         fontWeight: FontWeight.bold),
+              //                   )
+              //                 ],
+              //               ),
+              //               Text(
+              //                 "Phone Number: " + document['phoneNumber'],
+              //                 style:
+              //                     TextStyle(color: Colors.white, fontSize: 15),
+              //               ),
+              //             ],
+              //           ),
+              //           //   value: this.value,
+              //           // Checkbox(
+              //           //   onChanged: (value) => setState(() => value = value),
+              //           // ),
+              //         ],
+              //       ),
+              //       SizedBox(
+              //         height: 15.0,
+              //       ),
+              //     ],
+              //   ),
+              // );
+            }).toList(),
+          );
+        },
+      ),
+    );
+  }
+}
+
+
+class Doctor extends StatefulWidget {
+   final String name;
+   final String surname;
+   final String phone;
+
+   Doctor({this.name,this.surname,this.phone});
+ 
+   @override
+   _DoctorState createState() => _DoctorState();
+ }
+ 
+ class _DoctorState extends State<Doctor> {
+   bool selected = true;
+   @override
+   Widget build(BuildContext context) {
+         return Center(
                 child: Column(
                   children: [
                     SizedBox(
@@ -88,7 +192,7 @@ class _DoctorsViewState extends State<DoctorsView> {
                                       color: Colors.white, fontSize: 20),
                                 ),
                                 Text(
-                                  document['name'],
+                                  widget.name,
                                   style: TextStyle(
                                       color: Colors.white,
                                       fontSize: 20,
@@ -104,7 +208,7 @@ class _DoctorsViewState extends State<DoctorsView> {
                                       color: Colors.white, fontSize: 20),
                                 ),
                                 Text(
-                                  document['surname'],
+                                  widget.surname,
                                   style: TextStyle(
                                       color: Colors.white,
                                       fontSize: 20,
@@ -113,16 +217,18 @@ class _DoctorsViewState extends State<DoctorsView> {
                               ],
                             ),
                             Text(
-                              "Phone Number: " + document['phoneNumber'],
+                              "Phone Number: " + widget.phone,
                               style:
                                   TextStyle(color: Colors.white, fontSize: 15),
                             ),
                           ],
                         ),
-                        //   value: this.value,
-                        // Checkbox(
-                        //   onChanged: (value) => setState(() => value = value),
-                        // ),
+                        Checkbox(
+                          activeColor: MyColors.mountainMeadow,
+                          value: selected ?? true,
+                          onChanged: (bool val){
+                          setState(() { selected = val;});
+                        },),
                       ],
                     ),
                     SizedBox(
@@ -131,10 +237,5 @@ class _DoctorsViewState extends State<DoctorsView> {
                   ],
                 ),
               );
-            }).toList(),
-          );
-        },
-      ),
-    );
-  }
-}
+   }
+ }

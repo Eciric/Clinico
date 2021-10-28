@@ -73,10 +73,10 @@ class Appointments extends StatelessWidget {
                                   document2['surname'];
                             }
                           });
-                          //String current_doctor = doctors.docs.last['name'];
-                          //String current_doctor =
-                          //Converting date
-                          //print('test')
+                          bool prescriptionExist = false;
+                          if (document['prescription_id'] != "") {
+                            prescriptionExist = true;
+                          }
 
                           Timestamp temp = document['appointment_date'];
                           DateTime date = temp.toDate();
@@ -157,9 +157,13 @@ class Appointments extends StatelessWidget {
                                             context,
                                             MaterialPageRoute(
                                                 builder: (context) => Details(
-                                                    doctor: current_doctor,
-                                                    dateWithHours: dateDisplay,
-                                                    issue: document['issue'])),
+                                                      doctor: current_doctor,
+                                                      dateWithHours:
+                                                          dateDisplay,
+                                                      issue: document['issue'],
+                                                      prescriptionExist:
+                                                          prescriptionExist,
+                                                    )),
                                           );
                                         }),
                                   ],

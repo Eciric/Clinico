@@ -20,6 +20,7 @@ String issue = "Boli mnie brzuszek i nie mogę chodzić.";
 DateTime appointment_date = DateTime.now();
 DateTime created_date = DateTime.now();
 */
+//test
 final FirebaseAuth auth = FirebaseAuth.instance;
 final User user = auth.currentUser;
 final uid = user.uid;

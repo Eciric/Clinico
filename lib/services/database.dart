@@ -28,7 +28,7 @@ class DatabaseService {
 
   Future updateDoctorsData(String userName, String doctorid, String phoneNumber,
       String surname) async {
-    return await doctorsCollection.doc(uid).set({
+    return await doctorsCollection.doc(doctorid).set({
       'name': userName,
       'surname': surname,
       'doctorId': doctorid,
@@ -37,7 +37,7 @@ class DatabaseService {
   }
 
   Future updateSpecialization(String specializationName, String specid) async {
-    return await specializatonCollection.doc(uid).set({
+    return await specializatonCollection.doc(specid).set({
       'specializationId': specid,
       'specializationName': specializationName,
     });

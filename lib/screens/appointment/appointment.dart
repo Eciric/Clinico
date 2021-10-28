@@ -1,11 +1,15 @@
+import 'package:clinico/models/myUser.dart';
 import 'package:clinico/screens/details/details.dart';
+import 'package:clinico/services/auth.dart';
 import 'package:clinico/style/colors.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:clinico/services/database.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
+/*
 String appointment_id = '1';
 String doctor_id = '3';
 String user_id = 'EVy7S1L1vNYvBblfQN8dfSFhSrB2';
@@ -15,11 +19,16 @@ bool reminded = false;
 String issue = "Boli mnie brzuszek i nie mogę chodzić.";
 DateTime appointment_date = DateTime.now();
 DateTime created_date = DateTime.now();
+*/
+final FirebaseAuth auth = FirebaseAuth.instance;
+final User user = auth.currentUser;
+final uid = user.uid;
 
 class Appointments extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     //RESETING VARIABLE
+
     return Container(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
@@ -38,6 +47,7 @@ class Appointments extends StatelessWidget {
           body: StreamBuilder(
               stream: DatabaseService()
                   .appointmentCollection
+                  .where('user_id', isEqualTo: uid)
                   .orderBy('appointment_date', descending: true)
                   .snapshots(),
               builder: (BuildContext context,

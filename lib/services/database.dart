@@ -23,6 +23,7 @@ class DatabaseService {
       'phoneNumber': phoneNumber,
       'email': email,
       'pesel': pesel,
+      'isAdmin': false,
     });
   }
 

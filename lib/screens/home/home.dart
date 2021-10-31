@@ -2,6 +2,8 @@ import 'package:clinico/screens/about/about.dart';
 import 'package:clinico/screens/appointment/appointment.dart';
 import 'package:clinico/screens/info/info.dart';
 import 'package:clinico/screens/details/details.dart';
+import 'package:clinico/screens/profile/profile.dart';
+import 'package:clinico/screens/receipt/receiptview.dart';
 import 'package:clinico/screens/settings/settings.dart';
 import 'package:clinico/screens/visit/doctors.dart';
 import 'package:clinico/screens/visit/visitone.dart';
@@ -125,7 +127,7 @@ class Home extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => DoctorsView()),
+                                builder: (context) => ProfileView()),
                           );
                         },
                         child: Container(

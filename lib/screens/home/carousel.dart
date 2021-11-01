@@ -29,7 +29,7 @@ class MyCarousel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CarouselSlider(
-      options: CarouselOptions(height: 200.0),
+      options: CarouselOptions(height: 200.0, enlargeCenterPage: true),
       items: _carouselItems.map((item) {
         return Builder(
           builder: (BuildContext context) {

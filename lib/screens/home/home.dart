@@ -1,9 +1,9 @@
 import 'package:clinico/screens/about/about.dart';
 import 'package:clinico/screens/appointment/appointment.dart';
+import 'package:clinico/screens/home/carousel.dart';
 import 'package:clinico/screens/info/info.dart';
 import 'package:clinico/screens/profile/profile.dart';
 import 'package:clinico/screens/settings/settings.dart';
-import 'package:clinico/screens/visit/doctors.dart';
 import 'package:flutter/material.dart';
 import 'package:clinico/services/auth.dart';
 import 'package:clinico/style/colors.dart';
@@ -86,14 +86,17 @@ class Home extends StatelessWidget {
           height: (MediaQuery.of(context).size.height),
           decoration: BoxDecoration(
             image: DecorationImage(
-                image: AssetImage("assets/images/dashboard_background.png"),
+                image: AssetImage("assets/images/main_background.png"),
                 fit: BoxFit.fill),
           ),
           child: SingleChildScrollView(
             child: Container(
-              padding: EdgeInsets.symmetric(vertical: 20, horizontal: 50),
+              padding: EdgeInsets.symmetric(vertical: 20),
               child: Column(
                 children: <Widget>[
+                  SizedBox(
+                    height: 10,
+                  ),
                   Text(
                     'Dashboard',
                     style: TextStyle(
@@ -102,7 +105,7 @@ class Home extends StatelessWidget {
                     ),
                   ),
                   SizedBox(
-                    height: 5,
+                    height: 15,
                   ),
                   Container(
                     height: 150.0,
@@ -115,87 +118,8 @@ class Home extends StatelessWidget {
                         shape: BoxShape.circle,
                         border: Border.all(width: 2, color: Colors.white)),
                   ),
-                  SizedBox(height: 35),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => ProfileView()),
-                          );
-                        },
-                        child: Container(
-                          height: 115,
-                          width: 115,
-                          decoration: new BoxDecoration(
-                            color: MyColors.warmBlack.withOpacity(0.85),
-                            shape: BoxShape.circle,
-                            border: Border.all(width: 2, color: Colors.white),
-                          ),
-                          child: Icon(
-                            Icons.person,
-                            color: Colors.grey,
-                            size: 100,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => DoctorsView()),
-                          );
-                        },
-                        child: Container(
-                          height: 115,
-                          width: 115,
-                          decoration: new BoxDecoration(
-                              color: MyColors.mountainMeadow.withOpacity(0.85),
-                              border: Border.all(width: 2, color: Colors.white),
-                              image: DecorationImage(
-                                image:
-                                    AssetImage('assets/images/plus_icon.png'),
-                                fit: BoxFit.fill,
-                              ),
-                              shape: BoxShape.circle),
-                        ),
-                      ),
-                      SizedBox(
-                        width: 30,
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => Info()),
-                          );
-                        },
-                        child: Container(
-                          height: 115,
-                          width: 115,
-                          decoration: new BoxDecoration(
-                              color: MyColors.darkSkyBlue.withOpacity(0.85),
-                              border: Border.all(width: 2, color: Colors.white),
-                              image: DecorationImage(
-                                image: AssetImage('assets/images/location.png'),
-                              ),
-                              shape: BoxShape.circle),
-                        ),
-                      ),
-                    ],
-                  ),
+                  SizedBox(height: 80),
+                  MyCarousel(),
                 ],
               ),
             ),

@@ -86,7 +86,7 @@ class Home extends StatelessWidget {
           height: (MediaQuery.of(context).size.height),
           decoration: BoxDecoration(
             image: DecorationImage(
-                image: AssetImage("assets/images/dashboard_background.png"),
+                image: AssetImage("assets/images/main_background.png"),
                 fit: BoxFit.fill),
           ),
           child: SingleChildScrollView(
@@ -117,11 +117,6 @@ class Home extends StatelessWidget {
                   ),
                   SizedBox(height: 50),
                   MyCarousel(),
-                  SizedBox(
-                    height: 150,
-                  ),
-                  Text("Welcome to Clinico!",
-                      style: TextStyle(fontSize: 26, color: Colors.white))
                 ],
               ),
             ),

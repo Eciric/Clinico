@@ -11,35 +11,19 @@ class MyCarousel extends StatelessWidget {
     {
       "color": MyColors.mountainMeadow,
       "text": "My profile",
-      "onPressed": (context) {
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => ProfileView()));
-      }
+      "onPressed": new ProfileView()
     },
     {
       "color": MyColors.darkSkyBlue,
       "text": "Make an appointment",
-      "onPressed": (context) {
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => Appointments()));
-      }
+      "onPressed": new Appointments()
     },
     {
       "color": MyColors.prussianBlue,
       "text": "Clinic information",
-      "onPressed": (context) {
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => Info()));
-      }
+      "onPressed": new Info()
     },
-    {
-      "color": MyColors.warmBlack,
-      "text": "About us",
-      "onPressed": (context) {
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => About()));
-      }
-    },
+    {"color": MyColors.warmBlack, "text": "About us", "onPressed": new About()},
   ];
 
   @override
@@ -50,13 +34,20 @@ class MyCarousel extends StatelessWidget {
         return Builder(
           builder: (BuildContext context) {
             return GestureDetector(
-              onTap: () => item['onPresssed'](context),
+              onTap: () => {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => item['onPressed']))
+              },
               child: Container(
                   width: MediaQuery.of(context).size.width,
-                  margin: EdgeInsets.symmetric(horizontal: 5.0),
+                  margin: EdgeInsets.symmetric(horizontal: 15.0),
                   decoration: BoxDecoration(
                       color: item['color'],
-                      borderRadius: BorderRadius.circular(25)),
+                      borderRadius: BorderRadius.circular(25),
+                      border: Border.all(
+                        color: Colors.white,
+                        width: 2,
+                      )),
                   child: Center(
                       child: Container(
                           padding: EdgeInsets.all(5.0),

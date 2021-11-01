@@ -15,6 +15,8 @@ class CategoryDoctors extends StatefulWidget {
 }
 
 class _CategoryDoctorsState extends State<CategoryDoctors> {
+
+ List<Category> categories = [];
  @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,16 +31,9 @@ class _CategoryDoctorsState extends State<CategoryDoctors> {
             style: ButtonStyle(backgroundColor: MaterialStateProperty. all(MyColors.mountainMeadow),
             ),
             onPressed: (){
-              
-              // DatabaseService().addNewAppointmentToDatabase("7", "2", null, "2", false, false, true, "bol glowy", DateTime.now(), DateTime.now());
-              // DatabaseService().addNewAppointmentToDatabase("8", "2", null, "2", false, false, true, "bol glowy", DateTime.now(), DateTime.now());
-              // DatabaseService().addNewAppointmentToDatabase("9", "3", null, "2", false, false, true, "bol glowy", DateTime.now(), DateTime.now());
-              // DatabaseService().addNewAppointmentToDatabase("10", "4", null, "2", false, false, true, "bol glowy", DateTime.now(), DateTime.now());
-              // DatabaseService().addNewAppointmentToDatabase("11", "5", null, "2", false, false, true, "bol glowy", DateTime.now(), DateTime.now());
-
               Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => PickDate(doctors: widget.doctors,),));},
+              MaterialPageRoute(builder: (context) => PickDate(doctors: widget.doctors,categories: categories,),));},
             child: Text(
               'Go Next',
               style: TextStyle(
@@ -60,7 +55,8 @@ class _CategoryDoctorsState extends State<CategoryDoctors> {
           }
           return ListView(
             children: snapshot.data.docs.map((document) {
-              return Category(name: document['specializationName']);
+              categories.add(Category(specid: document['specializationId'],name: document['specializationName'],state: true,));
+              return Category(specid: document['specializationId'],name: document['specializationName'],state: true, category: categories);
             }).toList(),
           );
         },
@@ -70,8 +66,11 @@ class _CategoryDoctorsState extends State<CategoryDoctors> {
 }
  class Category extends StatefulWidget {
    final String name;
+   final String specid;
+   bool state;
+   List<Category> category;
 
-   Category({this.name});
+   Category({this.specid,this.name,this.state,this.category});
  
    @override
    _CategoryState createState() => _CategoryState();
@@ -93,9 +92,15 @@ class _CategoryDoctorsState extends State<CategoryDoctors> {
                   Text(widget.name??"test",style:  TextStyle(color: Colors.white,fontSize: 20,fontWeight: FontWeight.bold),),
                   Checkbox(
                     activeColor: MyColors.mountainMeadow,
-                    value: selected ?? true,
+                    value: widget.state ?? true,
                     onChanged: (bool val){
-                    setState(() { selected = val;});
+                    for(int i=0;i<widget.category.length;i++){
+                      if(widget.category.elementAt(i).specid == widget.specid)
+                      {
+                        setState(() {widget.category.elementAt(i).state = val;});
+                      }
+                    }
+                    setState(() { widget.state = val;});
                   },),
                 ],),
               ],

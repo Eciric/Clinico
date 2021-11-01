@@ -2,13 +2,15 @@ import 'package:clinico/screens/visit/visitone.dart';
 import 'package:clinico/screens/visit/widget/pickdate.dart';
 import 'package:clinico/style/colors.dart';
 import 'package:flutter/material.dart';
+import 'categoryDoctors.dart';
 import 'doctors.dart';
 
 class PickDate extends StatefulWidget {
 
   List<Doctor> doctors;
+  List<Category> categories;
 
-  PickDate({this.doctors});
+  PickDate({this.doctors,this.categories});
   @override
   _PickDateState createState() => _PickDateState();
 }
@@ -51,7 +53,7 @@ class _PickDateState extends State<PickDate> {
             onPressed: (){
               Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => VisitOne(doctors: widget.doctors,)));
+              MaterialPageRoute(builder: (context) => VisitOne(doctors: widget.doctors,categories: widget.categories,)));
               },
             child: Text(
               'Go Next',

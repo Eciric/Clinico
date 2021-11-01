@@ -55,8 +55,8 @@ class _DoctorsViewState extends State<DoctorsView> {
           }
           return ListView(
             children: snapshot.data.docs.map((document) {
-              doctorss.add(Doctor(name: document['name'],surname: document['surname'],phone: document['phoneNumber'],doctorId: document['doctorId'], state: true));
-              return Doctor(name: document['name'],surname: document['surname'],phone: document['phoneNumber'],doctorId: document['doctorId'], state: true,doctor: doctorss,);
+              doctorss.add(Doctor(name: document['name'],surname: document['surname'],phone: document['phoneNumber'],doctorId: document['doctorId'], state: true,specId: document['specid']));
+              return Doctor(name: document['name'],surname: document['surname'],phone: document['phoneNumber'],doctorId: document['doctorId'], state: true,doctor: doctorss,specId: document['specid'],);
             }).toList(),
           );
         },
@@ -71,10 +71,11 @@ class Doctor extends StatefulWidget {
    final String surname;
    final String phone;
    final String doctorId;
+   final List<dynamic> specId;
    List<Doctor> doctor;
    bool state;
 
-   Doctor({this.name,this.surname,this.phone,this.doctorId,this.state,this.doctor});
+   Doctor({this.name,this.surname,this.phone,this.doctorId,this.state,this.doctor,this.specId});
  
    @override
    _DoctorState createState() => _DoctorState();

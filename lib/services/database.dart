@@ -64,10 +64,11 @@ class DatabaseService {
       String prescription_id,
       bool confirmed,
       bool reminded,
+      bool is_free,
       String issue,
       DateTime appointment_date,
       DateTime created_date) async {
-    return await appointmentCollection.doc("5").set({
+    return await appointmentCollection.doc(appointment_id).set({
       'user_id': user_id,
       'appointment_id': appointment_id,
       'doctor_id': doctor_id,
@@ -77,6 +78,7 @@ class DatabaseService {
       'issue': issue,
       'appointment_date': appointment_date,
       'created_date': created_date,
+      'is_free' : is_free,
     });
   }
 }

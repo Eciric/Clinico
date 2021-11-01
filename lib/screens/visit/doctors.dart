@@ -10,6 +10,9 @@ class DoctorsView extends StatefulWidget {
 }
 
 class _DoctorsViewState extends State<DoctorsView> {
+
+  CollectionReference doctorsCollection = DatabaseService().doctorsCollection;
+  List<Doctor> doctorss = [];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,7 +32,7 @@ class _DoctorsViewState extends State<DoctorsView> {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => CategoryDoctors(),
+                      builder: (context) => CategoryDoctors(doctors: doctorss),
                     ));
               },
               child: Text(
@@ -52,86 +55,8 @@ class _DoctorsViewState extends State<DoctorsView> {
           }
           return ListView(
             children: snapshot.data.docs.map((document) {
-              return Doctor(name: document['name'],surname: document['surname'],phone: document['phoneNumber'],);
-              // return Center(
-              //   child: Column(
-              //     children: [
-              //       SizedBox(
-              //         height: 15.0,
-              //       ),
-              //       Row(
-              //         children: [
-              //           SizedBox(
-              //             width: 30.0,
-              //           ),
-              //           Container(
-              //             height: 80.0,
-              //             width: 80.0,
-              //             decoration: BoxDecoration(
-              //               image: DecorationImage(
-              //                 image: AssetImage('assets/images/doctor.jpg'),
-              //                 fit: BoxFit.fill,
-              //               ),
-              //               shape: BoxShape.circle,
-              //             ),
-              //           ),
-              //           SizedBox(
-              //             width: 20.0,
-              //           ),
-              //           Column(
-              //             crossAxisAlignment: CrossAxisAlignment.start,
-              //             children: [
-              //               Row(
-              //                 children: [
-              //                   Text(
-              //                     "Name: ",
-              //                     style: TextStyle(
-              //                         color: Colors.white, fontSize: 20),
-              //                   ),
-              //                   Text(
-              //                     document['name'],
-              //                     style: TextStyle(
-              //                         color: Colors.white,
-              //                         fontSize: 20,
-              //                         fontWeight: FontWeight.bold),
-              //                   )
-              //                 ],
-              //               ),
-              //               Row(
-              //                 children: [
-              //                   Text(
-              //                     "Surname: ",
-              //                     style: TextStyle(
-              //                         color: Colors.white, fontSize: 20),
-              //                   ),
-              //                   Text(
-              //                     document['surname'],
-              //                     style: TextStyle(
-              //                         color: Colors.white,
-              //                         fontSize: 20,
-              //                         fontWeight: FontWeight.bold),
-              //                   )
-              //                 ],
-              //               ),
-              //               Text(
-              //                 "Phone Number: " + document['phoneNumber'],
-              //                 style:
-              //                     TextStyle(color: Colors.white, fontSize: 15),
-              //               ),
-              //             ],
-              //           ),
-              //           //   value: this.value,
-              //           // Checkbox(
-              //           //   onChanged: (value) => setState(() => value = value),
-              //           // ),
-              //         ],
-              //       ),
-              //       SizedBox(
-              //         height: 15.0,
-              //       ),
-              //     ],
-              //   ),
-              // );
+              doctorss.add(Doctor(name: document['name'],surname: document['surname'],phone: document['phoneNumber'],doctorId: document['doctorId'], state: true));
+              return Doctor(name: document['name'],surname: document['surname'],phone: document['phoneNumber'],doctorId: document['doctorId'], state: true,doctor: doctorss,);
             }).toList(),
           );
         },
@@ -145,8 +70,11 @@ class Doctor extends StatefulWidget {
    final String name;
    final String surname;
    final String phone;
+   final String doctorId;
+   List<Doctor> doctor;
+   bool state;
 
-   Doctor({this.name,this.surname,this.phone});
+   Doctor({this.name,this.surname,this.phone,this.doctorId,this.state,this.doctor});
  
    @override
    _DoctorState createState() => _DoctorState();
@@ -225,9 +153,15 @@ class Doctor extends StatefulWidget {
                         ),
                         Checkbox(
                           activeColor: MyColors.mountainMeadow,
-                          value: selected ?? true,
+                          value: widget.state ?? true,
                           onChanged: (bool val){
-                          setState(() { selected = val;});
+                          for(int i=0;i<widget.doctor.length;i++){
+                            if(widget.doctor.elementAt(i).doctorId == widget.doctorId)
+                            {
+                              setState(() {widget.doctor.elementAt(i).state = val;});
+                            }
+                          }
+                          setState(() { widget.state = val;});
                         },),
                       ],
                     ),

@@ -3,8 +3,12 @@ import 'package:clinico/services/database.dart';
 import 'package:clinico/style/colors.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'doctors.dart';
 
 class CategoryDoctors extends StatefulWidget {
+
+  List<Doctor> doctors;
+  CategoryDoctors({this.doctors});
 
   @override
   _CategoryDoctorsState createState() => _CategoryDoctorsState();
@@ -24,9 +28,17 @@ class _CategoryDoctorsState extends State<CategoryDoctors> {
           TextButton(
             style: ButtonStyle(backgroundColor: MaterialStateProperty. all(MyColors.mountainMeadow),
             ),
-            onPressed: (){Navigator.push(
+            onPressed: (){
+              
+              // DatabaseService().addNewAppointmentToDatabase("7", "2", null, "2", false, false, true, "bol glowy", DateTime.now(), DateTime.now());
+              // DatabaseService().addNewAppointmentToDatabase("8", "2", null, "2", false, false, true, "bol glowy", DateTime.now(), DateTime.now());
+              // DatabaseService().addNewAppointmentToDatabase("9", "3", null, "2", false, false, true, "bol glowy", DateTime.now(), DateTime.now());
+              // DatabaseService().addNewAppointmentToDatabase("10", "4", null, "2", false, false, true, "bol glowy", DateTime.now(), DateTime.now());
+              // DatabaseService().addNewAppointmentToDatabase("11", "5", null, "2", false, false, true, "bol glowy", DateTime.now(), DateTime.now());
+
+              Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => PickDate(),));},
+              MaterialPageRoute(builder: (context) => PickDate(doctors: widget.doctors,),));},
             child: Text(
               'Go Next',
               style: TextStyle(
@@ -49,23 +61,6 @@ class _CategoryDoctorsState extends State<CategoryDoctors> {
           return ListView(
             children: snapshot.data.docs.map((document) {
               return Category(name: document['specializationName']);
-              // return Center(
-              //   child: Column(
-              //     children: [
-              //       SizedBox(height: 15.0,),
-              //       Row(
-              //         children: [
-              //           SizedBox(width: 30.0,),
-              //           Row(children: [
-              //               Text("Specialization: ",style:  TextStyle(color: Colors.white,fontSize: 20),),
-              //               Text(document['specializationName'],style:  TextStyle(color: Colors.white,fontSize: 20,fontWeight: FontWeight.bold),)
-              //             ],),
-              //         ],
-              //       ),
-              //       SizedBox(height: 15.0,),
-              //     ],
-              //   ),
-              // );
             }).toList(),
           );
         },

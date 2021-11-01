@@ -1,9 +1,14 @@
+import 'package:clinico/screens/visit/visitone.dart';
 import 'package:clinico/screens/visit/widget/pickdate.dart';
 import 'package:clinico/style/colors.dart';
 import 'package:flutter/material.dart';
+import 'doctors.dart';
 
 class PickDate extends StatefulWidget {
 
+  List<Doctor> doctors;
+
+  PickDate({this.doctors});
   @override
   _PickDateState createState() => _PickDateState();
 }
@@ -44,9 +49,9 @@ class _PickDateState extends State<PickDate> {
             style: ButtonStyle(backgroundColor: MaterialStateProperty. all(MyColors.mountainMeadow),
             ),
             onPressed: (){
-              // Navigator.push(
-              // context,
-              // MaterialPageRoute(builder: (context) => PickDate(),));
+              Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => VisitOne(doctors: widget.doctors,)));
               },
             child: Text(
               'Go Next',

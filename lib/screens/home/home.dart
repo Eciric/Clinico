@@ -94,6 +94,9 @@ class Home extends StatelessWidget {
               padding: EdgeInsets.symmetric(vertical: 20),
               child: Column(
                 children: <Widget>[
+                  SizedBox(
+                    height: 10,
+                  ),
                   Text(
                     'Dashboard',
                     style: TextStyle(
@@ -102,7 +105,7 @@ class Home extends StatelessWidget {
                     ),
                   ),
                   SizedBox(
-                    height: 5,
+                    height: 15,
                   ),
                   Container(
                     height: 150.0,
@@ -115,7 +118,7 @@ class Home extends StatelessWidget {
                         shape: BoxShape.circle,
                         border: Border.all(width: 2, color: Colors.white)),
                   ),
-                  SizedBox(height: 50),
+                  SizedBox(height: 80),
                   MyCarousel(),
                 ],
               ),

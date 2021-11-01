@@ -1,3 +1,4 @@
+import 'package:clinico/screens/appointment/appointment.dart';
 import 'package:clinico/services/database.dart';
 import 'package:clinico/style/colors.dart';
 import 'package:clinico/style/profileButtonDecoration.dart';
@@ -119,7 +120,9 @@ class ProfileView extends StatelessWidget {
                             children: [
                               ElevatedButton(
                                   style: raisedButtonStyle,
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    Navigator.push(context,MaterialPageRoute(builder: (context) => Appointments()),
+                          );},
                                   child: Wrap(
                                     crossAxisAlignment:
                                         WrapCrossAlignment.center,
@@ -158,7 +161,7 @@ class ProfileView extends StatelessWidget {
                                     children: [
                                       Text('Download data  ',
                                           style: TextStyle(fontSize: 16)),
-                                      Icon(Icons.download),
+                                      Icon(Icons.download_sharp),
                                     ],
                                   )),
                               ElevatedButton(

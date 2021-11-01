@@ -188,30 +188,7 @@ class Appointments extends StatelessWidget {
                         }).toList(),
                       );
                     });
-//TUTAJ WKLEJA SIE KOD Z DOŁU
               }),
         ));
   }
 }
-
-/*
-        body: Center(
-          child: ElevatedButton(
-            onPressed: () async {
-              //Navigator.pop(context);
-              /*
-            DatabaseService().addNewAppointmentToDatabase(
-                appointment_id,
-                doctor_id,
-                user_id,
-                prescription_id,
-                confirmed,
-                reminded,
-                issue,
-                appointment_date,
-                created_date);
-                */
-            },
-            child: Text('Uwaga dodaje dane do bazy danych (odkomentować)!'),
-          ),
-          */

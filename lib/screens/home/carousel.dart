@@ -3,6 +3,7 @@ import 'package:clinico/screens/about/about.dart';
 import 'package:clinico/screens/appointment/appointment.dart';
 import 'package:clinico/screens/info/info.dart';
 import 'package:clinico/screens/profile/profile.dart';
+import 'package:clinico/screens/visit/doctors.dart';
 import 'package:clinico/style/colors.dart';
 import 'package:flutter/material.dart';
 
@@ -17,7 +18,7 @@ class MyCarousel extends StatelessWidget {
     {
       "color": MyColors.darkSkyBlue,
       "text": "New appointment",
-      "onPressed": new Appointments(),
+      "onPressed": new DoctorsView(),
       "icon": Icons.note_add_outlined,
     },
     {

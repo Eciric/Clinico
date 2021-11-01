@@ -1,13 +1,20 @@
+import 'package:clinico/screens/appointment/appointment.dart';
 import 'package:clinico/services/database.dart';
 import 'package:clinico/style/colors.dart';
 import 'package:flutter/material.dart';
 
 class Details extends StatelessWidget {
-  const Details({Key key, this.doctor, this.dateWithHours, this.issue})
+  const Details(
+      {Key key,
+      this.doctor,
+      this.dateWithHours,
+      this.issue,
+      this.prescriptionExist})
       : super(key: key);
   final String doctor;
   final String dateWithHours;
   final String issue;
+  final bool prescriptionExist;
   @override
   Widget build(BuildContext context) {
     var onlyDate = dateWithHours.split(" ");
@@ -118,38 +125,71 @@ class Details extends StatelessWidget {
                     ),
                     child: Column(
                       children: <Widget>[
-                        SizedBox(height: 10.0),
-                        Text(
-                          'Presciption info',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(fontSize: 20, color: Colors.white),
-                        ),
-                        SizedBox(height: 10.0),
-                        Text(
-                          '${onlyDate[0]}',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(fontSize: 18, color: Colors.white),
-                        ),
-                        SizedBox(height: 10.0),
-                        Text(
-                          '${doctor}',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(fontSize: 18, color: Colors.white),
-                        ),
-                        SizedBox(height: 15.0),
-                        ElevatedButton(
-                          style: ButtonStyle(
-                              backgroundColor: MaterialStateProperty.all(
-                                  MyColors.mountainMeadow.withOpacity(0.9)),
-                              shape: MaterialStateProperty.all(
-                                  RoundedRectangleBorder(
-                                      borderRadius:
-                                          BorderRadius.circular(90.0)))),
-                          child: Text(
-                            'Download as PDF',
-                            style: TextStyle(color: Colors.white, fontSize: 24),
+                        Visibility(
+                          visible: prescriptionExist == true,
+                          child: Column(
+                            children: <Widget>[
+                              SizedBox(height: 10.0),
+                              Text(
+                                'Presciption info',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    fontSize: 20, color: Colors.white),
+                              ),
+                              SizedBox(height: 10.0),
+                              Text(
+                                '${onlyDate[0]}',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    fontSize: 18, color: Colors.white),
+                              ),
+                              SizedBox(height: 10.0),
+                              Text(
+                                '${doctor}',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    fontSize: 18, color: Colors.white),
+                              ),
+                              SizedBox(height: 15.0),
+                              ElevatedButton(
+                                style: ButtonStyle(
+                                    backgroundColor: MaterialStateProperty.all(
+                                        MyColors.mountainMeadow
+                                            .withOpacity(0.9)),
+                                    shape: MaterialStateProperty.all(
+                                        RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(90.0)))),
+                                child: Text(
+                                  'Download as PDF',
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 24),
+                                ),
+                                onPressed: () {},
+                              ),
+                            ],
                           ),
-                          onPressed: () {},
+                        ),
+                        Visibility(
+                          visible: prescriptionExist == false,
+                          child: Column(
+                            children: <Widget>[
+                              SizedBox(height: 10.0),
+                              Text(
+                                'Presciption info',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    fontSize: 20, color: Colors.white),
+                              ),
+                              SizedBox(height: 10.0),
+                              Text(
+                                'Wizyta się nie odbyła lub nie posiada żadnej istniejącej recepty!',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    fontSize: 18, color: Colors.white),
+                              ),
+                            ],
+                          ),
                         ),
                       ],
                     ),

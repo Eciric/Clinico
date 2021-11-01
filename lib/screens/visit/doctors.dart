@@ -13,6 +13,7 @@ class _DoctorsViewState extends State<DoctorsView> {
 
   CollectionReference doctorsCollection = DatabaseService().doctorsCollection;
   List<Doctor> doctorss = [];
+  bool state= true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,6 +54,7 @@ class _DoctorsViewState extends State<DoctorsView> {
               child: CircularProgressIndicator(),
             );
           }
+          
           return ListView(
             children: snapshot.data.docs.map((document) {
               doctorss.add(Doctor(name: document['name'],surname: document['surname'],phone: document['phoneNumber'],doctorId: document['doctorId'], state: true,specId: document['specid']));

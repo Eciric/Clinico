@@ -17,23 +17,22 @@ class PickDate extends StatefulWidget {
 
 class _PickDateState extends State<PickDate> {
 
-  DateTime date;
-  TimeOfDay time;
   DateTimeRange dataRange;
+  DateTimeRange dataRangeifnotcheck = DateTimeRange(start: DateTime.now(), end: DateTime(DateTime.now().year+5));
 
   String getFrom() {
     if(dataRange == null){
-      return 'From';
+      return '${dataRangeifnotcheck.start.day}/${dataRangeifnotcheck.start.month}/${dataRangeifnotcheck.start.year}';
     } else {
-      return '${dataRange.start.month}/${dataRange.start.day}/${dataRange.start.year}';
+      return '${dataRange.start.day}/${dataRange.start.month}/${dataRange.start.year}';
     }
   }
 
   String getUntil() {
     if(dataRange == null){
-      return 'Until';
+      return '${dataRangeifnotcheck.end.day}/${dataRangeifnotcheck.end.month}/${dataRangeifnotcheck.end.year}';
     } else {
-      return '${dataRange.end.month}/${dataRange.end.day}/${dataRange.end.year}';
+      return '${dataRange.end.day}/${dataRange.end.month}/${dataRange.end.year}';
     }
   }
 
@@ -53,7 +52,7 @@ class _PickDateState extends State<PickDate> {
             onPressed: (){
               Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => VisitOne(doctors: widget.doctors,categories: widget.categories,)));
+              MaterialPageRoute(builder: (context) => VisitOne(doctors: widget.doctors,categories: widget.categories,time: dataRange??dataRangeifnotcheck)));
               },
             child: Text(
               'Go Next',

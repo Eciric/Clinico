@@ -12,8 +12,9 @@ class VisitOne extends StatefulWidget {
 
   List<Doctor> doctors;
   List<Category> categories;
+  DateTimeRange time;
 
-  VisitOne({this.doctors,this.categories});
+  VisitOne({this.doctors,this.categories,this.time});
 
   @override
   _VisitOneState createState() => _VisitOneState();
@@ -58,13 +59,18 @@ class _VisitOneState extends State<VisitOne> {
 
           return ListView(
             children: snapshot.data.docs.map((document) {
+              Timestamp temp = document['appointment_date'];
+              DateTime dateofvisit = temp.toDate();
               for(int i=0;i<widget.doctors.length;i++){
                 if(document['doctor_id']==widget.doctors.elementAt(i).doctorId && widget.doctors.elementAt(i).state ==true)
                 {
                   for(int k=0;k<widget.categories.length;k++)
                   {
                     if(widget.doctors.elementAt(i).specId.contains(widget.categories.elementAt(k).specid)&&widget.categories.elementAt(k).state ==true)
-                      return Appointemnt(doctorid: document['doctor_id'],doctorname: widget.doctors.elementAt(i).name, doctorsurname: widget.doctors.elementAt(i).surname , time: document['appointment_date'].toDate(),appointmentid: document['appointment_id'],); 
+                    {
+                       if(widget.time.start.isBefore(dateofvisit)&&widget.time.end.isAfter(dateofvisit)&& DateTime.now().isBefore(dateofvisit))
+                        return Appointemnt(doctorid: document['doctor_id'],doctorname: widget.doctors.elementAt(i).name, doctorsurname: widget.doctors.elementAt(i).surname , time: document['appointment_date'].toDate(),appointmentid: document['appointment_id'],); 
+                    }
                   }
                 }
               }

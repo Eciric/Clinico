@@ -58,6 +58,13 @@ class DatabaseService {
     return documents.length;
   }
 
+  Future makeAnAppointment(String user_id, String appointment_id) async {
+    return await appointmentCollection.doc(appointment_id).update({
+      'user_id': user_id,
+      'is_free': false,
+    });
+  }
+
   Future addNewAppointmentToDatabase(
       String appointment_id,
       String doctor_id,
@@ -79,7 +86,7 @@ class DatabaseService {
       'issue': issue,
       'appointment_date': appointment_date,
       'created_date': created_date,
-      'is_free' : is_free,
+      'is_free': is_free,
     });
   }
 }

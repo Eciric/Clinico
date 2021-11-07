@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:clinico/screens/appointment/appointment.dart';
 import 'package:clinico/screens/home/home.dart';
 import 'package:clinico/services/database.dart';
 import 'package:clinico/style/colors.dart';
@@ -204,7 +205,10 @@ class _AppointemntState extends State<Appointemnt> {
                     'Book it',
                     style: TextStyle(color: Colors.white, fontSize: 25),
                   ),
-                  onPressed: () {},
+                  onPressed: () async {
+                    DatabaseService()
+                        .makeAnAppointment(uid, widget.appointmentid);
+                  },
                 ),
                 SizedBox(
                   height: 15.0,

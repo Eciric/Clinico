@@ -168,13 +168,14 @@ class Appointments extends StatelessWidget {
                                             context,
                                             MaterialPageRoute(
                                                 builder: (context) => Details(
-                                                      doctor: current_doctor,
-                                                      dateWithHours:
-                                                          dateDisplay,
-                                                      issue: document['issue'],
-                                                      prescriptionExist:
-                                                          prescriptionExist,
-                                                    )),
+                                                    doctor: current_doctor,
+                                                    dateWithHours: dateDisplay,
+                                                    issue: document['issue'],
+                                                    prescriptionExist:
+                                                        prescriptionExist,
+                                                    appointment_id: document[
+                                                        'appointment_id'],
+                                                    done: document['done'])),
                                           );
                                         }),
                                   ],

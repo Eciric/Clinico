@@ -9,12 +9,16 @@ class Details extends StatelessWidget {
       this.doctor,
       this.dateWithHours,
       this.issue,
-      this.prescriptionExist})
+      this.prescriptionExist,
+      this.appointment_id,
+      this.done})
       : super(key: key);
   final String doctor;
   final String dateWithHours;
   final String issue;
   final bool prescriptionExist;
+  final bool done;
+  final String appointment_id;
   @override
   Widget build(BuildContext context) {
     var onlyDate = dateWithHours.split(" ");
@@ -192,6 +196,26 @@ class Details extends StatelessWidget {
                           ),
                         ),
                       ],
+                    ),
+                  ),
+                  SizedBox(height: 40.0),
+                  Visibility(
+                    visible: done == false,
+                    child: ElevatedButton(
+                      style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all(
+                              MyColors.mountainMeadow.withOpacity(0.9)),
+                          shape: MaterialStateProperty.all(
+                              RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(90.0)))),
+                      child: Text(
+                        'Cancel appointment',
+                        style: TextStyle(color: Colors.white, fontSize: 24),
+                      ),
+                      onPressed: () {
+                        DatabaseService().cancelAnAppointment(appointment_id);
+                        Navigator.pop(context);
+                      },
                     ),
                   ),
                   SizedBox(height: 40.0),

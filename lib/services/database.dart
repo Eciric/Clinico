@@ -65,6 +65,13 @@ class DatabaseService {
     });
   }
 
+  Future cancelAnAppointment(String appointment_id) async {
+    return await appointmentCollection.doc(appointment_id).update({
+      'user_id': null,
+      'is_free': true,
+    });
+  }
+
   Future addNewAppointmentToDatabase(
       String appointment_id,
       String doctor_id,

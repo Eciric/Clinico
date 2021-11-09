@@ -213,8 +213,40 @@ class Details extends StatelessWidget {
                         style: TextStyle(color: Colors.white, fontSize: 24),
                       ),
                       onPressed: () {
-                        DatabaseService().cancelAnAppointment(appointment_id);
-                        Navigator.pop(context);
+                        Widget cancelButton = TextButton(
+                          child: Text("Cancel"),
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                        );
+                        Widget continueButton = TextButton(
+                          child: Text("Continue"),
+                          onPressed: () {
+                            DatabaseService()
+                                .cancelAnAppointment(appointment_id);
+                            Navigator.pop(context);
+                            Navigator.pop(context);
+                          },
+                        );
+
+                        // set up the AlertDialog
+                        AlertDialog alert = AlertDialog(
+                          title: Text("Alert"),
+                          content: Text(
+                              "Would you like to cancel your appointment?"),
+                          actions: [
+                            cancelButton,
+                            continueButton,
+                          ],
+                        );
+
+                        // show the dialog
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return alert;
+                          },
+                        );
                       },
                     ),
                   ),

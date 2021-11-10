@@ -2,6 +2,10 @@ import 'package:clinico/screens/about/about.dart';
 import 'package:clinico/screens/appointment/appointment.dart';
 import 'package:clinico/screens/home/carousel.dart';
 import 'package:clinico/screens/info/info.dart';
+
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:clinico/services/database.dart';
 import 'package:clinico/screens/profile/profile.dart';
 import 'package:clinico/screens/settings/settings.dart';
 import 'package:flutter/material.dart';
@@ -13,117 +17,155 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        resizeToAvoidBottomInset: false,
-        backgroundColor: MyColors.steelTeal,
-        appBar: AppBar(
-          title: Text('Clinico'),
-          backgroundColor: MyColors.darkSkyBlue,
-          elevation: 0.0,
-        ),
-        drawer: new Drawer(
-          child: ListView(
-            children: [
-              new ListTile(
-                tileColor: MyColors.darkSkyBlue,
-                leading: Icon(
-                  Icons.info,
-                  color: Colors.white,
-                ),
-                title: new Text('About Page'),
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => About()),
-                  );
-                },
-                trailing: Wrap(
-                  children: <Widget>[
-                    Icon(Icons.arrow_forward), // icon-1
+    return StreamBuilder(
+        stream: DatabaseService()
+            .userCollection
+            .where('userId', isEqualTo: FirebaseAuth.instance.currentUser.uid)
+            .snapshots(),
+        builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+          if (!snapshot.hasData) {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+          var user = snapshot.data.docs[0];
+
+          return Scaffold(
+              resizeToAvoidBottomInset: false,
+              backgroundColor: MyColors.steelTeal,
+              appBar: AppBar(
+                title: Text('Clinico'),
+                backgroundColor: MyColors.darkSkyBlue,
+                elevation: 0.0,
+              ),
+              drawer: new Drawer(
+                child: ListView(
+                  children: [
+                    new ListTile(
+                      tileColor: MyColors.darkSkyBlue,
+                      leading: Icon(
+                        Icons.info,
+                        color: Colors.white,
+                      ),
+                      title: new Text('About Page'),
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => About()),
+                        );
+                      },
+                      trailing: Wrap(
+                        children: <Widget>[
+                          Icon(Icons.arrow_forward), // icon-1
+                        ],
+                      ),
+                    ),
+                    Visibility(
+                      visible: user.get('role').toString() == 'doctor',
+                      child: new ListTile(
+                        tileColor: MyColors.darkSkyBlue,
+                        leading: Icon(
+                          Icons.info,
+                          color: Colors.white,
+                        ),
+                        title: new Text('Doctor panel'),
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => About()),
+                          );
+                        },
+                        trailing: Wrap(
+                          children: <Widget>[
+                            Icon(Icons.arrow_forward), // icon-1
+                          ],
+                        ),
+                      ),
+                    ),
+                    new ListTile(
+                      tileColor: MyColors.darkSkyBlue,
+                      leading: Icon(
+                        Icons.settings,
+                        color: Colors.white,
+                      ),
+                      title: new Text('Settings'),
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => SettingsView()),
+                        );
+                      },
+                      trailing: Wrap(
+                        children: <Widget>[
+                          Icon(Icons.arrow_forward), // icon-1
+                        ],
+                      ),
+                    ),
+                    new ListTile(
+                      tileColor: MyColors.darkSkyBlue,
+                      leading: Icon(
+                        Icons.person,
+                        color: Colors.white,
+                      ),
+                      title: new Text('Sign out'),
+                      onTap: () async {
+                        await _auth.signOut();
+                      },
+                      trailing: Wrap(
+                        children: <Widget>[
+                          Icon(Icons.arrow_forward), // icon-1
+                        ],
+                      ),
+                    ),
                   ],
                 ),
               ),
-              new ListTile(
-                tileColor: MyColors.darkSkyBlue,
-                leading: Icon(
-                  Icons.settings,
-                  color: Colors.white,
+              body: Container(
+                width: (MediaQuery.of(context).size.width),
+                height: (MediaQuery.of(context).size.height),
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                      image: AssetImage("assets/images/main_background.png"),
+                      fit: BoxFit.fill),
                 ),
-                title: new Text('Settings'),
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => SettingsView()),
-                  );
-                },
-                trailing: Wrap(
-                  children: <Widget>[
-                    Icon(Icons.arrow_forward), // icon-1
-                  ],
-                ),
-              ),
-              new ListTile(
-                tileColor: MyColors.darkSkyBlue,
-                leading: Icon(
-                  Icons.person,
-                  color: Colors.white,
-                ),
-                title: new Text('Sign out'),
-                onTap: () async {
-                  await _auth.signOut();
-                },
-                trailing: Wrap(
-                  children: <Widget>[
-                    Icon(Icons.arrow_forward), // icon-1
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ),
-        body: Container(
-          width: (MediaQuery.of(context).size.width),
-          height: (MediaQuery.of(context).size.height),
-          decoration: BoxDecoration(
-            image: DecorationImage(
-                image: AssetImage("assets/images/main_background.png"),
-                fit: BoxFit.fill),
-          ),
-          child: SingleChildScrollView(
-            child: Container(
-              padding: EdgeInsets.symmetric(vertical: 20),
-              child: Column(
-                children: <Widget>[
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Text(
-                    'Dashboard',
-                    style: TextStyle(
-                      fontSize: 35,
-                      color: Colors.white,
+                child: SingleChildScrollView(
+                  child: Container(
+                    padding: EdgeInsets.symmetric(vertical: 20),
+                    child: Column(
+                      children: <Widget>[
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Text(
+                          'Dashboard',
+                          style: TextStyle(
+                            fontSize: 35,
+                            color: Colors.white,
+                          ),
+                        ),
+                        SizedBox(
+                          height: 15,
+                        ),
+                        Container(
+                          height: 150.0,
+                          width: 150.0,
+                          decoration: BoxDecoration(
+                              image: DecorationImage(
+                                image: AssetImage('assets/images/logo.jpg'),
+                                fit: BoxFit.fill,
+                              ),
+                              shape: BoxShape.circle,
+                              border:
+                                  Border.all(width: 2, color: Colors.white)),
+                        ),
+                        SizedBox(height: 80),
+                        MyCarousel(),
+                      ],
                     ),
                   ),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  Container(
-                    height: 150.0,
-                    width: 150.0,
-                    decoration: BoxDecoration(
-                        image: DecorationImage(
-                          image: AssetImage('assets/images/logo.jpg'),
-                          fit: BoxFit.fill,
-                        ),
-                        shape: BoxShape.circle,
-                        border: Border.all(width: 2, color: Colors.white)),
-                  ),
-                  SizedBox(height: 80),
-                  MyCarousel(),
-                ],
-              ),
-            ),
-          ),
-        ));
+                ),
+              ));
+        });
   }
 }

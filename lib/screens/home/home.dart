@@ -1,16 +1,10 @@
 import 'package:clinico/screens/about/about.dart';
-import 'package:clinico/screens/appointment/appointment.dart';
 import 'package:clinico/screens/doctor/appointmentCreating.dart';
 import 'package:clinico/screens/home/carousel.dart';
-import 'package:clinico/screens/info/info.dart';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:clinico/services/database.dart';
-import 'package:clinico/screens/profile/profile.dart';
 import 'package:clinico/screens/settings/settings.dart';
-
-import 'package:clinico/screens/doctor/appointmentCreating.dart';
 import 'package:flutter/material.dart';
 import 'package:clinico/services/auth.dart';
 import 'package:clinico/style/colors.dart';
@@ -31,7 +25,6 @@ class Home extends StatelessWidget {
               child: CircularProgressIndicator(),
             );
           }
-          var user = snapshot.data.docs[0];
 
           return Scaffold(
               resizeToAvoidBottomInset: false,
@@ -40,91 +33,6 @@ class Home extends StatelessWidget {
                 title: Text('Clinico'),
                 backgroundColor: MyColors.darkSkyBlue,
                 elevation: 0.0,
-              ),
-              drawer: new Drawer(
-                child: ListView(
-                  children: [
-                    new ListTile(
-                      tileColor: MyColors.darkSkyBlue,
-                      leading: Icon(
-                        Icons.info,
-                        color: Colors.white,
-                      ),
-                      title: new Text('About Page'),
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => About()),
-                        );
-                      },
-                      trailing: Wrap(
-                        children: <Widget>[
-                          Icon(Icons.arrow_forward), // icon-1
-                        ],
-                      ),
-                    ),
-                    Visibility(
-                      visible: user.get('role').toString() == 'doctor',
-                      child: new ListTile(
-                        tileColor: MyColors.darkSkyBlue,
-                        leading: Icon(
-                          Icons.info,
-                          color: Colors.white,
-                        ),
-                        title: new Text('Doctor panel'),
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                    DoctorAppointmentCreating()),
-                          );
-                        },
-                        trailing: Wrap(
-                          children: <Widget>[
-                            Icon(Icons.arrow_forward), // icon-1
-                          ],
-                        ),
-                      ),
-                    ),
-                    new ListTile(
-                      tileColor: MyColors.darkSkyBlue,
-                      leading: Icon(
-                        Icons.settings,
-                        color: Colors.white,
-                      ),
-                      title: new Text('Settings'),
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => SettingsView()),
-                        );
-                      },
-                      trailing: Wrap(
-                        children: <Widget>[
-                          Icon(Icons.arrow_forward), // icon-1
-                        ],
-                      ),
-                    ),
-                    new ListTile(
-                      tileColor: MyColors.darkSkyBlue,
-                      leading: Icon(
-                        Icons.person,
-                        color: Colors.white,
-                      ),
-                      title: new Text('Sign out'),
-                      onTap: () async {
-                        await _auth.signOut();
-                      },
-                      trailing: Wrap(
-                        children: <Widget>[
-                          Icon(Icons.arrow_forward), // icon-1
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
               ),
               body: Container(
                 width: (MediaQuery.of(context).size.width),

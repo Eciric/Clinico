@@ -1,5 +1,6 @@
 import 'package:clinico/screens/about/about.dart';
 import 'package:clinico/screens/appointment/appointment.dart';
+import 'package:clinico/screens/doctor/appointmentCreating.dart';
 import 'package:clinico/screens/home/carousel.dart';
 import 'package:clinico/screens/info/info.dart';
 
@@ -8,6 +9,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:clinico/services/database.dart';
 import 'package:clinico/screens/profile/profile.dart';
 import 'package:clinico/screens/settings/settings.dart';
+
+import 'package:clinico/screens/doctor/appointmentCreating.dart';
 import 'package:flutter/material.dart';
 import 'package:clinico/services/auth.dart';
 import 'package:clinico/style/colors.dart';
@@ -72,7 +75,9 @@ class Home extends StatelessWidget {
                         onTap: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => About()),
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    DoctorAppointmentCreating()),
                           );
                         },
                         trailing: Wrap(

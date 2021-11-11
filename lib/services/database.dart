@@ -24,6 +24,7 @@ class DatabaseService {
       'email': email,
       'pesel': pesel,
       'role': 'user',
+      'doctor_id': '',
     });
   }
 
@@ -80,8 +81,10 @@ class DatabaseService {
       bool confirmed,
       bool reminded,
       bool is_free,
+      bool done,
       String issue,
       DateTime appointment_date,
+      DateTime appointment_date_end,
       DateTime created_date) async {
     return await appointmentCollection.doc(appointment_id).set({
       'user_id': user_id,
@@ -90,8 +93,10 @@ class DatabaseService {
       'prescription_id': prescription_id,
       'confirmed': confirmed,
       'reminded': reminded,
+      'done': done,
       'issue': issue,
       'appointment_date': appointment_date,
+      'appointment_date_end': appointment_date_end,
       'created_date': created_date,
       'is_free': is_free,
     });

@@ -131,6 +131,8 @@ class Appointemnt extends StatefulWidget {
 class _AppointemntState extends State<Appointemnt> {
   bool selected = true;
   String month_name = "";
+  String hour = "";
+  String minute = "";
   @override
   Widget build(BuildContext context) {
     if (widget.time.month == 1)
@@ -156,6 +158,14 @@ class _AppointemntState extends State<Appointemnt> {
     else if (widget.time.month == 11)
       month_name = "November";
     else if (widget.time.month == 12) month_name = "December";
+    if (widget.time.hour >= 0 && widget.time.hour <= 9)
+      hour = "0" + widget.time.hour.toString();
+    else
+      hour = widget.time.hour.toString();
+    if (widget.time.minute >= 0 && widget.time.minute <= 9)
+      minute = "0" + widget.time.minute.toString();
+    else
+      minute = widget.time.minute.toString();
     return Center(
       child: Column(
         children: [
@@ -184,7 +194,7 @@ class _AppointemntState extends State<Appointemnt> {
                   height: 10.0,
                 ),
                 Text(
-                  "Time: ${widget.time.hour}:${widget.time.minute}",
+                  "Time: ${hour}:${minute}",
                   style: TextStyle(color: Colors.white, fontSize: 16),
                 ),
                 SizedBox(

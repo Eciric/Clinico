@@ -74,7 +74,7 @@ class DatabaseService {
   }
 
   Future addNewAppointmentToDatabase(
-      String appointment_id,
+      String unique_id,
       String doctor_id,
       String user_id,
       String prescription_id,
@@ -86,9 +86,9 @@ class DatabaseService {
       DateTime appointment_date,
       DateTime appointment_date_end,
       DateTime created_date) async {
-    return await appointmentCollection.doc(appointment_id).set({
+    return await appointmentCollection.doc(unique_id).set({
       'user_id': user_id,
-      'appointment_id': appointment_id,
+      'appointment_id': unique_id,
       'doctor_id': doctor_id,
       'prescription_id': prescription_id,
       'confirmed': confirmed,
@@ -100,5 +100,32 @@ class DatabaseService {
       'created_date': created_date,
       'is_free': is_free,
     });
+  }
+
+  Future checkIfDateIsFree(
+      DateTime start, DateTime end, String doctor_id) async {
+    QuerySnapshot result = await appointmentCollection
+        .where('doctor_id', isEqualTo: doctor_id)
+        .get();
+    List<DocumentSnapshot> documents = result.docs;
+    for (var doc in documents) {
+      //print(doc.get("appointment_id"));
+      Timestamp ts_currentStart = doc.get("appointment_date");
+      Timestamp ts_currentEnd = doc.get("appointment_date_end");
+      DateTime currentStart = ts_currentStart.toDate();
+      DateTime currentEnd = ts_currentEnd.toDate();
+      //print("Start: " + start.toString());
+      //print("End: " + end.toString());
+
+      //print("StartC: " + currentStart.toString());
+      //print("EndC: " + currentEnd.toString());
+      if (currentStart.isBefore(start) && currentEnd.isAfter(start)) {
+        return false;
+      }
+      if (currentStart.isBefore(end) && currentEnd.isAfter(end)) {
+        return false;
+      }
+    }
+    return true;
   }
 }

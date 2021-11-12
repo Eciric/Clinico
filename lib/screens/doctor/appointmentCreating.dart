@@ -1,14 +1,15 @@
 import 'package:clinico/models/myUser.dart';
+import 'package:clinico/screens/appointment/appointment.dart';
 import 'package:clinico/screens/details/details.dart';
 import 'package:clinico/screens/visit/widget/pickdate.dart';
 import 'package:clinico/services/auth.dart';
 import 'package:clinico/style/colors.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:uuid/uuid.dart';
 import 'package:clinico/services/database.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-
 import 'package:url_launcher/url_launcher.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
@@ -25,8 +26,8 @@ class _DoctorAppointmentCreatingState extends State<DoctorAppointmentCreating> {
   String minute = "--";
   String error = "";
   String hour2 = "--";
+  var uuid = Uuid();
   String minute2 = "--";
-
   DateTime selectedDate = DateTime.now();
   @override
   Widget build(BuildContext context) {
@@ -56,6 +57,7 @@ class _DoctorAppointmentCreatingState extends State<DoctorAppointmentCreating> {
                 (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
               if (snapshot.hasData) {
                 var user = snapshot.data.docs[0];
+
                 return Center(
                   child: Container(
                     width: MediaQuery.of(context).size.width * 4 / 5,
@@ -210,34 +212,53 @@ class _DoctorAppointmentCreatingState extends State<DoctorAppointmentCreating> {
                                       minute2;
                                   DateTime dateTimeEndAppointment =
                                       DateTime.parse(wholeDate2);
-
                                   if (dateTimeEndAppointment
                                       .isAfter(dateTimeStartAppointment)) {
-                                    DatabaseService()
-                                        .addNewAppointmentToDatabase(
-                                            "12",
-                                            user.get('doctor_id'),
-                                            null,
-                                            "5",
-                                            false,
-                                            false,
-                                            true,
-                                            false,
-                                            "",
+                                    var uuid_var = uuid.v4();
+                                    var status = DatabaseService()
+                                        .checkIfDateIsFree(
                                             dateTimeStartAppointment,
                                             dateTimeEndAppointment,
-                                            DateTime.now());
-                                    showDialog(
-                                        context: context,
-                                        builder: (context) {
-                                          Future.delayed(Duration(seconds: 1),
-                                              () {
-                                            Navigator.of(context).pop(true);
-                                          });
-                                          return AlertDialog(
-                                            title: Text('Dodano wizytę!'),
-                                          );
+                                            user.get('doctor_id'));
+                                    status.then((doc) {
+                                      if (doc == true) {
+                                        DatabaseService(uid: uuid_var)
+                                            .addNewAppointmentToDatabase(
+                                                uuid_var,
+                                                user.get('doctor_id'),
+                                                null,
+                                                "",
+                                                false,
+                                                false,
+                                                true,
+                                                false,
+                                                "",
+                                                dateTimeStartAppointment,
+                                                dateTimeEndAppointment,
+                                                DateTime.now());
+                                        showDialog(
+                                            context: context,
+                                            builder: (context) {
+                                              Future.delayed(
+                                                  Duration(seconds: 1), () {
+                                                Navigator.of(context).pop(true);
+                                              });
+                                              return AlertDialog(
+                                                title: Text(
+                                                  'Dodano wizytę!',
+                                                  textAlign: TextAlign.center,
+                                                ),
+                                              );
+                                            });
+                                        setState(() {
+                                          error = "";
                                         });
+                                      } else {
+                                        setState(() {
+                                          error = "Date is taken!";
+                                        });
+                                      }
+                                    });
                                   } else {
                                     setState(() {
                                       error = "Wrong hours!";

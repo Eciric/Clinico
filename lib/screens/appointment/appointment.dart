@@ -119,7 +119,7 @@ class Appointments extends StatelessWidget {
                                   children: [
                                     Text(
                                       //snapshot.data.docs.length
-                                      'Appointment #${document['appointment_id']}',
+                                      '#Appointment#',
                                       style: TextStyle(
                                           color: Colors.white, fontSize: 18),
                                     ),

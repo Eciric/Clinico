@@ -1,176 +1,73 @@
 import 'package:clinico/screens/about/about.dart';
-import 'package:clinico/screens/appointment/appointment.dart';
 import 'package:clinico/screens/doctor/appointmentCreating.dart';
-import 'package:clinico/screens/home/carousel.dart';
-import 'package:clinico/screens/info/info.dart';
-
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:clinico/services/database.dart';
-import 'package:clinico/screens/profile/profile.dart';
-import 'package:clinico/screens/settings/settings.dart';
-
-import 'package:clinico/screens/doctor/appointmentCreating.dart';
-import 'package:flutter/material.dart';
+import 'package:clinico/screens/home/homePage.dart';
 import 'package:clinico/services/auth.dart';
+import 'package:clinico/screens/settings/settings.dart';
+import 'package:clinico/services/database.dart';
 import 'package:clinico/style/colors.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 
-class Home extends StatelessWidget {
-  final AuthService _auth = AuthService();
+class Home extends StatefulWidget {
+  const Home({Key key}) : super(key: key);
+
+  @override
+  _HomeState createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+  int _currentIndex = 0;
+
+  List _screens = [
+    HomePage(),
+    About(),
+    SettingsView(),
+  ];
+
+  List<BottomNavigationBarItem> _navItems = [
+    BottomNavigationBarItem(
+      label: "Home",
+      icon: Icon(Icons.home),
+    ),
+    BottomNavigationBarItem(
+      label: "About",
+      icon: Icon(Icons.info_outline),
+    ),
+    BottomNavigationBarItem(
+      label: "Settings",
+      icon: Icon(Icons.settings),
+    ),
+    BottomNavigationBarItem(
+      label: "Sign out",
+      icon: Icon(Icons.logout),
+    ),
+  ];
+
+  void _updateIndex(int value) {
+    setState(() {
+      _currentIndex = value;
+      if (_currentIndex == 3) {
+        AuthService().signOut();
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder(
-        stream: DatabaseService()
-            .userCollection
-            .where('userId', isEqualTo: FirebaseAuth.instance.currentUser.uid)
-            .snapshots(),
-        builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-          if (!snapshot.hasData) {
-            return Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-          var user = snapshot.data.docs[0];
-
-          return Scaffold(
-              resizeToAvoidBottomInset: false,
-              backgroundColor: MyColors.steelTeal,
-              appBar: AppBar(
-                title: Text('Clinico'),
-                backgroundColor: MyColors.darkSkyBlue,
-                elevation: 0.0,
-              ),
-              drawer: new Drawer(
-                child: ListView(
-                  children: [
-                    new ListTile(
-                      tileColor: MyColors.darkSkyBlue,
-                      leading: Icon(
-                        Icons.info,
-                        color: Colors.white,
-                      ),
-                      title: new Text('About Page'),
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => About()),
-                        );
-                      },
-                      trailing: Wrap(
-                        children: <Widget>[
-                          Icon(Icons.arrow_forward), // icon-1
-                        ],
-                      ),
-                    ),
-                    Visibility(
-                      visible: user.get('role').toString() == 'doctor',
-                      child: new ListTile(
-                        tileColor: MyColors.darkSkyBlue,
-                        leading: Icon(
-                          Icons.info,
-                          color: Colors.white,
-                        ),
-                        title: new Text('Doctor panel'),
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                    DoctorAppointmentCreating()),
-                          );
-                        },
-                        trailing: Wrap(
-                          children: <Widget>[
-                            Icon(Icons.arrow_forward), // icon-1
-                          ],
-                        ),
-                      ),
-                    ),
-                    new ListTile(
-                      tileColor: MyColors.darkSkyBlue,
-                      leading: Icon(
-                        Icons.settings,
-                        color: Colors.white,
-                      ),
-                      title: new Text('Settings'),
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => SettingsView()),
-                        );
-                      },
-                      trailing: Wrap(
-                        children: <Widget>[
-                          Icon(Icons.arrow_forward), // icon-1
-                        ],
-                      ),
-                    ),
-                    new ListTile(
-                      tileColor: MyColors.darkSkyBlue,
-                      leading: Icon(
-                        Icons.person,
-                        color: Colors.white,
-                      ),
-                      title: new Text('Sign out'),
-                      onTap: () async {
-                        await _auth.signOut();
-                      },
-                      trailing: Wrap(
-                        children: <Widget>[
-                          Icon(Icons.arrow_forward), // icon-1
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              body: Container(
-                width: (MediaQuery.of(context).size.width),
-                height: (MediaQuery.of(context).size.height),
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                      image: AssetImage("assets/images/main_background.png"),
-                      fit: BoxFit.fill),
-                ),
-                child: SingleChildScrollView(
-                  child: Container(
-                    padding: EdgeInsets.symmetric(vertical: 20),
-                    child: Column(
-                      children: <Widget>[
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Text(
-                          'Dashboard',
-                          style: TextStyle(
-                            fontSize: 35,
-                            color: Colors.white,
-                          ),
-                        ),
-                        SizedBox(
-                          height: 15,
-                        ),
-                        Container(
-                          height: 150.0,
-                          width: 150.0,
-                          decoration: BoxDecoration(
-                              image: DecorationImage(
-                                image: AssetImage('assets/images/logo.jpg'),
-                                fit: BoxFit.fill,
-                              ),
-                              shape: BoxShape.circle,
-                              border:
-                                  Border.all(width: 2, color: Colors.white)),
-                        ),
-                        SizedBox(height: 80),
-                        MyCarousel(),
-                      ],
-                    ),
-                  ),
-                ),
-              ));
-        });
+    return Scaffold(
+      body: _screens[_currentIndex],
+      bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        currentIndex: _currentIndex,
+        onTap: _updateIndex,
+        backgroundColor: MyColors.warmBlack,
+        unselectedItemColor: Colors.white,
+        selectedItemColor: MyColors.mountainMeadow,
+        selectedFontSize: 13,
+        unselectedFontSize: 13,
+        iconSize: 30,
+        items: _navItems,
+      ),
+    );
   }
 }

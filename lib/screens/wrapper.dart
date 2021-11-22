@@ -8,11 +8,10 @@ import 'home/home.dart';
 class Wrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-
     final user = Provider.of<MyUser>(context);
 
     // Check if Login then show apropriate page
-    if (user == null){
+    if (user == null) {
       return Authenticate();
     } else {
       return Home();

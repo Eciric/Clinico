@@ -9,12 +9,16 @@ class Details extends StatelessWidget {
       this.doctor,
       this.dateWithHours,
       this.issue,
-      this.prescriptionExist})
+      this.prescriptionExist,
+      this.appointment_id,
+      this.done})
       : super(key: key);
   final String doctor;
   final String dateWithHours;
   final String issue;
   final bool prescriptionExist;
+  final bool done;
+  final String appointment_id;
   @override
   Widget build(BuildContext context) {
     var onlyDate = dateWithHours.split(" ");
@@ -192,6 +196,58 @@ class Details extends StatelessWidget {
                           ),
                         ),
                       ],
+                    ),
+                  ),
+                  SizedBox(height: 40.0),
+                  Visibility(
+                    visible: done == false,
+                    child: ElevatedButton(
+                      style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all(
+                              MyColors.mountainMeadow.withOpacity(0.9)),
+                          shape: MaterialStateProperty.all(
+                              RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(90.0)))),
+                      child: Text(
+                        'Cancel appointment',
+                        style: TextStyle(color: Colors.white, fontSize: 24),
+                      ),
+                      onPressed: () {
+                        Widget cancelButton = TextButton(
+                          child: Text("Cancel"),
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                        );
+                        Widget continueButton = TextButton(
+                          child: Text("Continue"),
+                          onPressed: () {
+                            DatabaseService()
+                                .cancelAnAppointment(appointment_id);
+                            Navigator.pop(context);
+                            Navigator.pop(context);
+                          },
+                        );
+
+                        // set up the AlertDialog
+                        AlertDialog alert = AlertDialog(
+                          title: Text("Alert"),
+                          content: Text(
+                              "Would you like to cancel your appointment?"),
+                          actions: [
+                            cancelButton,
+                            continueButton,
+                          ],
+                        );
+
+                        // show the dialog
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return alert;
+                          },
+                        );
+                      },
                     ),
                   ),
                   SizedBox(height: 40.0),

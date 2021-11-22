@@ -119,7 +119,7 @@ class Appointments extends StatelessWidget {
                                   children: [
                                     Text(
                                       //snapshot.data.docs.length
-                                      'Appointment #${document['appointment_id']}',
+                                      '#Appointment#',
                                       style: TextStyle(
                                           color: Colors.white, fontSize: 18),
                                     ),
@@ -168,13 +168,14 @@ class Appointments extends StatelessWidget {
                                             context,
                                             MaterialPageRoute(
                                                 builder: (context) => Details(
-                                                      doctor: current_doctor,
-                                                      dateWithHours:
-                                                          dateDisplay,
-                                                      issue: document['issue'],
-                                                      prescriptionExist:
-                                                          prescriptionExist,
-                                                    )),
+                                                    doctor: current_doctor,
+                                                    dateWithHours: dateDisplay,
+                                                    issue: document['issue'],
+                                                    prescriptionExist:
+                                                        prescriptionExist,
+                                                    appointment_id: document[
+                                                        'appointment_id'],
+                                                    done: document['done'])),
                                           );
                                         }),
                                   ],

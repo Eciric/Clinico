@@ -32,10 +32,6 @@ class _DoctorsViewState extends State<DoctorsView> {
           title: Text("1/4 Doctor pick"),
           actions: [
             TextButton(
-                style: ButtonStyle(
-                  backgroundColor:
-                      MaterialStateProperty.all(MyColors.mountainMeadow),
-                ),
                 onPressed: () {
                   Navigator.push(
                       context,

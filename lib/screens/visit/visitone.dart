@@ -40,10 +40,6 @@ class _VisitOneState extends State<VisitOne> {
           title: Text("Available appointments"),
           actions: [
             TextButton(
-                style: ButtonStyle(
-                  backgroundColor:
-                      MaterialStateProperty.all(MyColors.mountainMeadow),
-                ),
                 onPressed: () {
                   Navigator.push(
                       context, MaterialPageRoute(builder: (context) => Home()));

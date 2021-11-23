@@ -54,10 +54,6 @@ class _PickDateState extends State<PickDate> {
           title: Text("3/4 Date pick"),
           actions: [
             TextButton(
-                style: ButtonStyle(
-                  backgroundColor:
-                      MaterialStateProperty.all(MyColors.mountainMeadow),
-                ),
                 onPressed: () {
                   Navigator.push(
                       context,

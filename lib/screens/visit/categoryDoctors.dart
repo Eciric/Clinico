@@ -34,10 +34,6 @@ class _CategoryDoctorsState extends State<CategoryDoctors> {
           title: Text("2/4 Specialization pick"),
           actions: [
             TextButton(
-                style: ButtonStyle(
-                  backgroundColor:
-                      MaterialStateProperty.all(MyColors.mountainMeadow),
-                ),
                 onPressed: () {
                   Navigator.push(
                       context,

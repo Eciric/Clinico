@@ -18,6 +18,7 @@ class ProfileViewState extends State<ProfileView> {
   final double avatarHeight = 135;
   final double avatarWidth = 135;
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  final DatabaseService databaseService = new DatabaseService();
 
   bool isDownloadDataDisabled;
   PdfCreator pdfCreator;
@@ -29,9 +30,12 @@ class ProfileViewState extends State<ProfileView> {
     isDownloadDataDisabled = false;
   }
 
-  void deleteUser() {
-    _auth.currentUser
+  void deleteUser(var user) async {
+    Navigator.pop(context);
+    await _auth.currentUser
         .delete()
+        .then((value) =>
+            {databaseService.userCollection.doc(user.get('userId')).delete()})
         .then((value) => {
               Fluttertoast.showToast(
                   msg: "User deleted successfully",
@@ -244,7 +248,29 @@ class ProfileViewState extends State<ProfileView> {
                               ElevatedButton(
                                   style: raisedDangerButtonStyle,
                                   onPressed: () {
-                                    deleteUser();
+                                    return showDialog<String>(
+                                      context: context,
+                                      builder: (BuildContext context) =>
+                                          AlertDialog(
+                                        title: const Text('Deleting account'),
+                                        content: const Text(
+                                            'Are you sure you want to delete the account?'),
+                                        actions: <Widget>[
+                                          TextButton(
+                                            onPressed: () => Navigator.pop(
+                                                context, 'Cancel'),
+                                            child: const Text('Cancel'),
+                                          ),
+                                          TextButton(
+                                            onPressed: () => {
+                                              Navigator.pop(context, 'Delete'),
+                                              deleteUser(user)
+                                            },
+                                            child: const Text('Delete'),
+                                          ),
+                                        ],
+                                      ),
+                                    );
                                   },
                                   child: Wrap(
                                     crossAxisAlignment:

@@ -1,4 +1,3 @@
-import 'package:clinico/screens/appointment/appointment.dart';
 import 'package:clinico/services/database.dart';
 import 'package:clinico/style/colors.dart';
 import 'package:flutter/material.dart';

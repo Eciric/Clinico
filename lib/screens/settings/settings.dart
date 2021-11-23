@@ -1,4 +1,3 @@
-import 'package:clinico/services/database.dart';
 import 'package:clinico/style/colors.dart';
 import 'package:flutter/material.dart';
 
@@ -12,14 +11,7 @@ class SettingsView extends StatelessWidget {
         elevation: 0.0,
         title: Text("Settings"),
       ),
-      body: Center(
-        child: ElevatedButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          child: Text('Go back!'),
-        ),
-      ),
+      body: Column(children: [Text("Settings")]),
     );
   }
 }

@@ -19,7 +19,9 @@
     <!-- tu skonczylem -->
    <application
         android:label="clinico"
+        android:usesCleartextTraffic="true"
         android:icon="@mipmap/ic_launcher">
+        
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"

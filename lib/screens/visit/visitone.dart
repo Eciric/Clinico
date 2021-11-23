@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:clinico/screens/appointment/appointment.dart';
 import 'package:clinico/screens/home/home.dart';
 import 'package:clinico/services/database.dart';

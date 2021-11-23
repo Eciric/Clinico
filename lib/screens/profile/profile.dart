@@ -1,15 +1,87 @@
 import 'package:clinico/screens/appointment/appointment.dart';
+import 'package:clinico/services/auth.dart';
 import 'package:clinico/services/database.dart';
+import 'package:clinico/services/pdfCreator.dart';
 import 'package:clinico/style/colors.dart';
 import 'package:clinico/style/profileButtonDecoration.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:clinico/services/stringExtension.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
-class ProfileView extends StatelessWidget {
+class ProfileView extends StatefulWidget {
+  @override
+  ProfileViewState createState() => new ProfileViewState();
+}
+
+class ProfileViewState extends State<ProfileView> {
   final double avatarHeight = 135;
   final double avatarWidth = 135;
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final AuthService authService = new AuthService();
+
+  bool isDownloadDataDisabled;
+  PdfCreator pdfCreator;
+
+  @override
+  void initState() {
+    super.initState();
+    pdfCreator = new PdfCreator();
+    isDownloadDataDisabled = false;
+  }
+
+  void deleteUser() {
+    _auth.currentUser
+        .delete()
+        .then((value) => {
+              Fluttertoast.showToast(
+                  msg: "User deleted successfully",
+                  toastLength: Toast.LENGTH_SHORT,
+                  gravity: ToastGravity.BOTTOM_RIGHT,
+                  timeInSecForIosWeb: 1,
+                  backgroundColor: Colors.green,
+                  textColor: Colors.white,
+                  fontSize: 16.0),
+              authService.signOut()
+            })
+        .catchError((error) => {
+              Fluttertoast.showToast(
+                  msg: "Failed to delete user",
+                  toastLength: Toast.LENGTH_SHORT,
+                  gravity: ToastGravity.BOTTOM_RIGHT,
+                  timeInSecForIosWeb: 1,
+                  backgroundColor: Colors.red,
+                  textColor: Colors.white,
+                  fontSize: 16.0)
+            });
+  }
+
+  void downloadUserData(var user) {
+    if (!isDownloadDataDisabled) {
+      isDownloadDataDisabled = true;
+      pdfCreator.writeUserDataToPDF(user);
+      pdfCreator
+          .saveUserDataToPDF(user)
+          .then((value) => Fluttertoast.showToast(
+              msg: "PDF saved successfully",
+              toastLength: Toast.LENGTH_SHORT,
+              gravity: ToastGravity.BOTTOM_RIGHT,
+              timeInSecForIosWeb: 1,
+              backgroundColor: Colors.green,
+              textColor: Colors.white,
+              fontSize: 16.0))
+          .catchError((error) => Fluttertoast.showToast(
+              msg: "Failed to save PDF",
+              toastLength: Toast.LENGTH_SHORT,
+              gravity: ToastGravity.BOTTOM_RIGHT,
+              timeInSecForIosWeb: 1,
+              backgroundColor: Colors.red,
+              textColor: Colors.white,
+              fontSize: 16.0));
+    }
+    isDownloadDataDisabled = false;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -121,8 +193,12 @@ class ProfileView extends StatelessWidget {
                               ElevatedButton(
                                   style: raisedButtonStyle,
                                   onPressed: () {
-                                    Navigator.push(context,MaterialPageRoute(builder: (context) => Appointments()),
-                          );},
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => Appointments()),
+                                    );
+                                  },
                                   child: Wrap(
                                     crossAxisAlignment:
                                         WrapCrossAlignment.center,
@@ -154,7 +230,11 @@ class ProfileView extends StatelessWidget {
                             children: [
                               ElevatedButton(
                                   style: raisedButtonStyle,
-                                  onPressed: () {},
+                                  onPressed: isDownloadDataDisabled
+                                      ? null
+                                      : () {
+                                          downloadUserData(user);
+                                        },
                                   child: Wrap(
                                     crossAxisAlignment:
                                         WrapCrossAlignment.center,
@@ -166,7 +246,9 @@ class ProfileView extends StatelessWidget {
                                   )),
                               ElevatedButton(
                                   style: raisedDangerButtonStyle,
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    deleteUser();
+                                  },
                                   child: Wrap(
                                     crossAxisAlignment:
                                         WrapCrossAlignment.center,

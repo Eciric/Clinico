@@ -1,13 +1,10 @@
-import 'package:clinico/models/myUser.dart';
 import 'package:clinico/screens/details/details.dart';
-import 'package:clinico/services/auth.dart';
 import 'package:clinico/style/colors.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:clinico/services/database.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:intl/date_symbol_data_local.dart';
 
 /*
 String appointment_id = '1';

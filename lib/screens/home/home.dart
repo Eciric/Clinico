@@ -1,11 +1,8 @@
 import 'package:clinico/screens/about/about.dart';
-import 'package:clinico/screens/doctor/appointmentCreating.dart';
 import 'package:clinico/screens/home/homePage.dart';
 import 'package:clinico/services/auth.dart';
 import 'package:clinico/screens/settings/settings.dart';
-import 'package:clinico/services/database.dart';
 import 'package:clinico/style/colors.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatefulWidget {

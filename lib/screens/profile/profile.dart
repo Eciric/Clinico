@@ -1,5 +1,4 @@
 import 'package:clinico/screens/appointment/appointment.dart';
-import 'package:clinico/services/auth.dart';
 import 'package:clinico/services/database.dart';
 import 'package:clinico/services/pdfCreator.dart';
 import 'package:clinico/style/colors.dart';
@@ -19,7 +18,6 @@ class ProfileViewState extends State<ProfileView> {
   final double avatarHeight = 135;
   final double avatarWidth = 135;
   final FirebaseAuth _auth = FirebaseAuth.instance;
-  final AuthService authService = new AuthService();
 
   bool isDownloadDataDisabled;
   PdfCreator pdfCreator;
@@ -43,7 +41,6 @@ class ProfileViewState extends State<ProfileView> {
                   backgroundColor: Colors.green,
                   textColor: Colors.white,
                   fontSize: 16.0),
-              authService.signOut()
             })
         .catchError((error) => {
               Fluttertoast.showToast(

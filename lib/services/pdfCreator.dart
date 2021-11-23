@@ -22,7 +22,7 @@ class PdfCreator {
           pw.Header(level: 1, text: 'UserId'),
           pw.Paragraph(text: '${user.get('userId').toString()}'),
           pw.Header(level: 1, text: 'DoctorId'),
-          pw.Paragraph(text: '${user.get('doctorId').toString()}'),
+          pw.Paragraph(text: '${user.get('doctor_id').toString()}'),
           pw.Header(level: 1, text: 'Name'),
           pw.Paragraph(text: '${user.get('name').toString()}'),
           pw.Header(level: 1, text: 'Surname'),
@@ -46,7 +46,6 @@ class PdfCreator {
     String documentPath = documentDirectory.path;
     File file = File("${documentPath}/${user.get('userId').toString()}.pdf");
     file.writeAsBytesSync(await pdf.save());
-    print(documentPath);
   }
 
   writePrescriptionToPDF(var prescription) {

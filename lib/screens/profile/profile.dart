@@ -20,14 +20,12 @@ class ProfileViewState extends State<ProfileView> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final DatabaseService databaseService = new DatabaseService();
 
-  bool isDownloadDataDisabled;
   PdfCreator pdfCreator;
 
   @override
   void initState() {
     super.initState();
     pdfCreator = new PdfCreator();
-    isDownloadDataDisabled = false;
   }
 
   void deleteUser(var user) async {
@@ -59,29 +57,25 @@ class ProfileViewState extends State<ProfileView> {
   }
 
   void downloadUserData(var user) {
-    if (!isDownloadDataDisabled) {
-      isDownloadDataDisabled = true;
-      pdfCreator.writeUserDataToPDF(user);
-      pdfCreator
-          .saveUserDataToPDF(user)
-          .then((value) => Fluttertoast.showToast(
-              msg: "PDF saved successfully",
-              toastLength: Toast.LENGTH_SHORT,
-              gravity: ToastGravity.BOTTOM_RIGHT,
-              timeInSecForIosWeb: 1,
-              backgroundColor: Colors.green,
-              textColor: Colors.white,
-              fontSize: 16.0))
-          .catchError((error) => Fluttertoast.showToast(
-              msg: "Failed to save PDF",
-              toastLength: Toast.LENGTH_SHORT,
-              gravity: ToastGravity.BOTTOM_RIGHT,
-              timeInSecForIosWeb: 1,
-              backgroundColor: Colors.red,
-              textColor: Colors.white,
-              fontSize: 16.0));
-    }
-    isDownloadDataDisabled = false;
+    pdfCreator.writeUserDataToPDF(user);
+    pdfCreator
+        .saveUserDataToPDF(user)
+        .then((value) => Fluttertoast.showToast(
+            msg: "PDF saved successfully",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM_RIGHT,
+            timeInSecForIosWeb: 1,
+            backgroundColor: Colors.green,
+            textColor: Colors.white,
+            fontSize: 16.0))
+        .catchError((error) => Fluttertoast.showToast(
+            msg: "Failed to save PDF",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM_RIGHT,
+            timeInSecForIosWeb: 1,
+            backgroundColor: Colors.red,
+            textColor: Colors.white,
+            fontSize: 16.0));
   }
 
   @override
@@ -231,11 +225,9 @@ class ProfileViewState extends State<ProfileView> {
                             children: [
                               ElevatedButton(
                                   style: raisedButtonStyle,
-                                  onPressed: isDownloadDataDisabled
-                                      ? null
-                                      : () {
-                                          downloadUserData(user);
-                                        },
+                                  onPressed: () {
+                                    downloadUserData(user);
+                                  },
                                   child: Wrap(
                                     crossAxisAlignment:
                                         WrapCrossAlignment.center,

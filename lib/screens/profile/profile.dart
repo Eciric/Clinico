@@ -132,7 +132,8 @@ class ProfileViewState extends State<ProfileView> {
                                   SizedBox(
                                     height: 10,
                                   ),
-                                  Text('Doctor / Patient',
+                                  Text(
+                                      '${user.get('role').toString().toCapitalized()}',
                                       style: TextStyle(
                                           fontSize: 18, color: Colors.white)),
                                   SizedBox(

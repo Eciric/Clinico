@@ -277,6 +277,8 @@ class _DoctorAppointmentCreatingState extends State<DoctorAppointmentCreating> {
                     ),
                   ),
                 );
+              } else {
+                return Container();
               }
             }),
       ),

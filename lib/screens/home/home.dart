@@ -1,5 +1,6 @@
 import 'package:clinico/screens/about/about.dart';
 import 'package:clinico/screens/doctor/appointmentCreating.dart';
+import 'package:clinico/screens/doctor/doctor_lobby.dart';
 import 'package:clinico/screens/home/homePage.dart';
 import 'package:clinico/screens/home/signOutMock.dart';
 import 'package:clinico/services/auth.dart';
@@ -58,7 +59,7 @@ class _HomeState extends State<Home> {
                         icon: Icon(Icons.list_alt),
                       ),
                     );
-                    _screens.add(DoctorAppointmentCreating());
+                    _screens.add(DoctorLobby());
                   }),
                 }
             });

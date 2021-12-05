@@ -13,6 +13,8 @@ class DatabaseService {
       FirebaseFirestore.instance.collection('specialization');
   final CollectionReference appointmentCollection =
       FirebaseFirestore.instance.collection('appointment');
+  final CollectionReference prescriptionCollection =
+      FirebaseFirestore.instance.collection('prescription');
 
   Future updateUserData(String userName, String uid, String phoneNumber,
       String email, String pesel, String surname) async {
@@ -127,5 +129,45 @@ class DatabaseService {
       }
     }
     return true;
+  }
+
+  Future getUsersDoctorId(String user_id) async {
+    var result = await userCollection.where('userId', isEqualTo: user_id).get();
+    return result.docs[0].get('doctor_id');
+  }
+
+  Future getUsersNameAndSurnameByID(String user_id) async {
+    if (user_id == null) {
+      return "Appointment isn't booked";
+    }
+    var result = await userCollection.where('userId', isEqualTo: user_id).get();
+    if (result.docs.length > 0) {
+      String name =
+          result.docs[0].get('name') + " " + result.docs[0].get('surname');
+      return name;
+    }
+    return "Appointment isn't booked";
+  }
+
+  Future finishAppointment(String appointment_id) async {
+    return await appointmentCollection.doc(appointment_id).update({
+      'done': true,
+    });
+  }
+
+  Future addPrescription(
+      String prescription_id, String diagnosis, String text) async {
+    return await prescriptionCollection.doc(prescription_id).set({
+      'prescription_id': prescription_id,
+      'diagnosis': diagnosis,
+      'description': text,
+    });
+  }
+
+  Future modifyPrescriptionInAppointment(
+      String prescription_id, String appointment_id) async {
+    return await appointmentCollection
+        .doc(appointment_id)
+        .update({'prescription_id': prescription_id});
   }
 }

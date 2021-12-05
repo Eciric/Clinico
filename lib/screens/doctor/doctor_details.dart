@@ -16,14 +16,12 @@ class DoctorDetails extends StatefulWidget {
     this.end_date,
     this.patient,
     this.appointment_id,
-    this.issue,
   });
   final bool status;
   final String start_date;
   final String end_date;
   final String patient;
   final String appointment_id;
-  final String issue;
   @override
   _DoctorDetailsState createState() => _DoctorDetailsState();
 }
@@ -115,32 +113,6 @@ class _DoctorDetailsState extends State<DoctorDetails> {
                         ),
                       );
                     }),
-                SizedBox(height: 30.0),
-                Visibility(
-                  visible: widget.status == true,
-                  child: Text(
-                    'Issue',
-                    style: TextStyle(
-                      fontSize: 26,
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-                Visibility(
-                  visible: widget.status == true,
-                  child: SizedBox(height: 10.0),
-                ),
-                Visibility(
-                  visible: widget.status == true,
-                  child: Text(
-                    '${widget.issue}',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 18,
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
                 Visibility(
                   visible: widget.status == true,
                   child: SizedBox(height: 30.0),

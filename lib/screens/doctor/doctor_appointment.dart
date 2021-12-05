@@ -160,13 +160,13 @@ class _DoctorAppointmentsState extends State<DoctorAppointments> {
                                           context,
                                           MaterialPageRoute(
                                             builder: (context) => DoctorDetails(
-                                                status: res2,
-                                                start_date: dateDisplay,
-                                                end_date: dateDisplay2,
-                                                patient: document['user_id'],
-                                                appointment_id:
-                                                    document['appointment_id'],
-                                                issue: document['issue']),
+                                              status: res2,
+                                              start_date: dateDisplay,
+                                              end_date: dateDisplay2,
+                                              patient: document['user_id'],
+                                              appointment_id:
+                                                  document['appointment_id'],
+                                            ),
                                           ),
                                         );
                                       }),

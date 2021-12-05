@@ -7,14 +7,12 @@ class Details extends StatelessWidget {
       {Key key,
       this.doctor,
       this.dateWithHours,
-      this.issue,
       this.prescriptionExist,
       this.appointment_id,
       this.done})
       : super(key: key);
   final String doctor;
   final String dateWithHours;
-  final String issue;
   final bool prescriptionExist;
   final bool done;
   final String appointment_id;
@@ -84,23 +82,6 @@ class Details extends StatelessWidget {
                   SizedBox(height: 10.0),
                   Text(
                     '${doctor}',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 18,
-                      color: Colors.white,
-                    ),
-                  ),
-                  SizedBox(height: 30.0),
-                  Text(
-                    'Issue',
-                    style: TextStyle(
-                      fontSize: 26,
-                      color: Colors.white,
-                    ),
-                  ),
-                  SizedBox(height: 10.0),
-                  Text(
-                    '${issue}',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 18,

@@ -167,7 +167,6 @@ class Appointments extends StatelessWidget {
                                                 builder: (context) => Details(
                                                     doctor: current_doctor,
                                                     dateWithHours: dateDisplay,
-                                                    issue: document['issue'],
                                                     prescriptionExist:
                                                         prescriptionExist,
                                                     appointment_id: document[

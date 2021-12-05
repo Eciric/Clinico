@@ -225,7 +225,6 @@ class _DoctorAppointmentCreatingState extends State<DoctorAppointmentCreating> {
                                                 false,
                                                 true,
                                                 false,
-                                                "",
                                                 dateTimeStartAppointment,
                                                 dateTimeEndAppointment,
                                                 DateTime.now());

@@ -84,7 +84,6 @@ class DatabaseService {
       bool reminded,
       bool is_free,
       bool done,
-      String issue,
       DateTime appointment_date,
       DateTime appointment_date_end,
       DateTime created_date) async {
@@ -96,7 +95,6 @@ class DatabaseService {
       'confirmed': confirmed,
       'reminded': reminded,
       'done': done,
-      'issue': issue,
       'appointment_date': appointment_date,
       'appointment_date_end': appointment_date_end,
       'created_date': created_date,

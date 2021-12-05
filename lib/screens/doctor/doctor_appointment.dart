@@ -153,11 +153,14 @@ class _DoctorAppointmentsState extends State<DoctorAppointments> {
                                         style: TextStyle(
                                             color: Colors.white, fontSize: 24),
                                       ),
-                                      onPressed: () {
+                                      onPressed: () async {
+                                        var res2 = await DatabaseService()
+                                            .doesUserExist(document['user_id']);
                                         Navigator.push(
                                           context,
                                           MaterialPageRoute(
                                             builder: (context) => DoctorDetails(
+                                                status: res2,
                                                 start_date: dateDisplay,
                                                 end_date: dateDisplay2,
                                                 patient: document['user_id'],

@@ -149,6 +149,17 @@ class DatabaseService {
     return "Appointment isn't booked";
   }
 
+  Future doesUserExist(String user_id) async {
+    if (user_id == null) {
+      return false;
+    }
+    var result = await userCollection.where('userId', isEqualTo: user_id).get();
+    if (result.docs.length > 0) {
+      return true;
+    }
+    return false;
+  }
+
   Future finishAppointment(String appointment_id) async {
     return await appointmentCollection.doc(appointment_id).update({
       'done': true,

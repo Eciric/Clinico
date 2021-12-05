@@ -11,12 +11,14 @@ import 'package:intl/intl.dart';
 
 class DoctorDetails extends StatefulWidget {
   const DoctorDetails({
+    this.status,
     this.start_date,
     this.end_date,
     this.patient,
     this.appointment_id,
     this.issue,
   });
+  final bool status;
   final String start_date;
   final String end_date;
   final String patient;
@@ -114,87 +116,114 @@ class _DoctorDetailsState extends State<DoctorDetails> {
                       );
                     }),
                 SizedBox(height: 30.0),
-                Text(
-                  'Issue',
-                  style: TextStyle(
-                    fontSize: 26,
-                    color: Colors.white,
+                Visibility(
+                  visible: widget.status == true,
+                  child: Text(
+                    'Issue',
+                    style: TextStyle(
+                      fontSize: 26,
+                      color: Colors.white,
+                    ),
                   ),
                 ),
-                SizedBox(height: 10.0),
-                Text(
-                  '${widget.issue}',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 18,
-                    color: Colors.white,
+                Visibility(
+                  visible: widget.status == true,
+                  child: SizedBox(height: 10.0),
+                ),
+                Visibility(
+                  visible: widget.status == true,
+                  child: Text(
+                    '${widget.issue}',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: Colors.white,
+                    ),
                   ),
                 ),
-                SizedBox(height: 30.0),
-                Text(
-                  'Prescription Details',
-                  style: TextStyle(
-                    fontSize: 32,
-                    color: Colors.white,
+                Visibility(
+                  visible: widget.status == true,
+                  child: SizedBox(height: 30.0),
+                ),
+                Visibility(
+                  visible: widget.status == true,
+                  child: Text(
+                    'Prescription Details',
+                    style: TextStyle(
+                      fontSize: 32,
+                      color: Colors.white,
+                    ),
                   ),
                 ),
                 SizedBox(height: 20.0),
-                TextFormField(
-                  style: TextStyle(color: Colors.white, fontSize: 20),
-                  textAlign: TextAlign.center,
-                  maxLines: null,
-                  keyboardType: TextInputType.multiline,
-                  decoration: InputDecoration(
-                    hintText: 'Type text for prescription',
-                    hintStyle: TextStyle(color: Colors.white),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                Visibility(
+                  visible: widget.status == true,
+                  child: TextFormField(
+                    style: TextStyle(color: Colors.white, fontSize: 20),
+                    textAlign: TextAlign.center,
+                    maxLines: null,
+                    keyboardType: TextInputType.multiline,
+                    decoration: InputDecoration(
+                      hintText: 'Type text for prescription',
+                      hintStyle: TextStyle(color: Colors.white),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                      ),
                     ),
+                    onChanged: (val) {
+                      setState(() => prescription = val);
+                    },
                   ),
-                  onChanged: (val) {
-                    setState(() => prescription = val);
-                  },
                 ),
                 SizedBox(height: 50.0),
-                TextFormField(
-                  style: TextStyle(color: Colors.white, fontSize: 20),
-                  textAlign: TextAlign.center,
-                  maxLines: null,
-                  keyboardType: TextInputType.multiline,
-                  decoration: InputDecoration(
-                    hintText: 'Type text for diagnosis',
-                    hintStyle: TextStyle(color: Colors.white),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                Visibility(
+                  visible: widget.status == true,
+                  child: TextFormField(
+                    style: TextStyle(color: Colors.white, fontSize: 20),
+                    textAlign: TextAlign.center,
+                    maxLines: null,
+                    keyboardType: TextInputType.multiline,
+                    decoration: InputDecoration(
+                      hintText: 'Type text for diagnosis',
+                      hintStyle: TextStyle(color: Colors.white),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                      ),
                     ),
+                    onChanged: (val) {
+                      setState(() => diagnosis = val);
+                    },
                   ),
-                  onChanged: (val) {
-                    setState(() => diagnosis = val);
-                  },
                 ),
-                SizedBox(height: 50.0),
-                ElevatedButton(
-                  style: ButtonStyle(
-                      minimumSize: MaterialStateProperty.all(Size(250, 60)),
-                      backgroundColor: MaterialStateProperty.all(
-                          MyColors.darkSkyBlue.withOpacity(0.5)),
-                      shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                          side: BorderSide(
-                              color: Colors.white,
-                              width: 1,
-                              style: BorderStyle.solid),
-                          borderRadius: BorderRadius.circular(90.0)))),
-                  child: Text(
-                    'Add prescription',
-                    style: TextStyle(color: Colors.white, fontSize: 30),
+                Visibility(
+                  visible: widget.status == true,
+                  child: SizedBox(height: 50.0),
+                ),
+                Visibility(
+                  visible: widget.status == true,
+                  child: ElevatedButton(
+                    style: ButtonStyle(
+                        minimumSize: MaterialStateProperty.all(Size(250, 60)),
+                        backgroundColor: MaterialStateProperty.all(
+                            MyColors.darkSkyBlue.withOpacity(0.5)),
+                        shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                            side: BorderSide(
+                                color: Colors.white,
+                                width: 1,
+                                style: BorderStyle.solid),
+                            borderRadius: BorderRadius.circular(90.0)))),
+                    child: Text(
+                      'Add prescription',
+                      style: TextStyle(color: Colors.white, fontSize: 30),
+                    ),
+                    onPressed: () async {
+                      var v4 = uuid.v4();
+                      DatabaseService()
+                          .addPrescription(v4, diagnosis, prescription);
+                      DatabaseService().modifyPrescriptionInAppointment(
+                          v4, widget.appointment_id);
+                    },
                   ),
-                  onPressed: () async {
-                    var v4 = uuid.v4();
-                    DatabaseService()
-                        .addPrescription(v4, diagnosis, prescription);
-                    DatabaseService().modifyPrescriptionInAppointment(
-                        v4, widget.appointment_id);
-                  },
                 ),
                 SizedBox(height: 50.0),
                 ElevatedButton(

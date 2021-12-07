@@ -179,4 +179,13 @@ class DatabaseService {
         .doc(appointment_id)
         .update({'prescription_id': prescription_id});
   }
+
+  Future modifyUserData(
+      String name, String surname, String user_id, String phoneNumber) async {
+    return await userCollection.doc(user_id).update({
+      'name': name,
+      'surname': surname,
+      'phoneNumber': phoneNumber,
+    });
+  }
 }

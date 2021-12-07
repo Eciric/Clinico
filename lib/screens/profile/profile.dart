@@ -1,4 +1,5 @@
 import 'package:clinico/screens/appointment/appointment.dart';
+import 'package:clinico/screens/profile/edit_data.dart';
 import 'package:clinico/services/database.dart';
 import 'package:clinico/services/pdfCreator.dart';
 import 'package:clinico/style/colors.dart';
@@ -206,7 +207,13 @@ class ProfileViewState extends State<ProfileView> {
                                   )),
                               ElevatedButton(
                                   style: raisedButtonStyle,
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => EditUserData()),
+                                    );
+                                  },
                                   child: Wrap(
                                     crossAxisAlignment:
                                         WrapCrossAlignment.center,

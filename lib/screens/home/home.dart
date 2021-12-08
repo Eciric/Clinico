@@ -1,4 +1,5 @@
 import 'package:clinico/screens/about/about.dart';
+import 'package:clinico/screens/admin/adminView.dart';
 import 'package:clinico/screens/doctor/appointmentCreating.dart';
 import 'package:clinico/screens/doctor/doctor_lobby.dart';
 import 'package:clinico/screens/home/homePage.dart';
@@ -61,7 +62,19 @@ class _HomeState extends State<Home> {
                     );
                     _screens.add(DoctorLobby());
                   }),
-                }
+                },
+              if(user.docs.first.get('isAdmin') == true)
+              {
+                setState(() {
+                    _navItems.add(
+                      BottomNavigationBarItem(
+                        label: "Admin panel",
+                        icon: Icon(Icons.admin_panel_settings),
+                      ),
+                    );
+                    _screens.add(AdminPanel());
+                  }),
+              }
             });
   }
 

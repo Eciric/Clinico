@@ -8,7 +8,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:clinico/services/stringExtension.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+//import 'package:fluttertoast/fluttertoast.dart';
 
 class ProfileView extends StatefulWidget {
   @override
@@ -21,63 +21,63 @@ class ProfileViewState extends State<ProfileView> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final DatabaseService databaseService = new DatabaseService();
 
-  PdfCreator pdfCreator;
+  //PdfCreator pdfCreator;
 
   @override
   void initState() {
     super.initState();
-    pdfCreator = new PdfCreator();
+   // pdfCreator = new PdfCreator();
   }
 
-  void deleteUser(var user) async {
-    Navigator.pop(context);
-    await _auth.currentUser
-        .delete()
-        .then((value) =>
-            {databaseService.userCollection.doc(user.get('userId')).delete()})
-        .then((value) => {
-              Fluttertoast.showToast(
-                  msg: "User deleted successfully",
-                  toastLength: Toast.LENGTH_SHORT,
-                  gravity: ToastGravity.BOTTOM_RIGHT,
-                  timeInSecForIosWeb: 1,
-                  backgroundColor: Colors.green,
-                  textColor: Colors.white,
-                  fontSize: 16.0),
-            })
-        .catchError((error) => {
-              Fluttertoast.showToast(
-                  msg: "Failed to delete user",
-                  toastLength: Toast.LENGTH_SHORT,
-                  gravity: ToastGravity.BOTTOM_RIGHT,
-                  timeInSecForIosWeb: 1,
-                  backgroundColor: Colors.red,
-                  textColor: Colors.white,
-                  fontSize: 16.0)
-            });
-  }
+  // void deleteUser(var user) async {
+  //   Navigator.pop(context);
+  //   await _auth.currentUser
+  //       .delete()
+  //       .then((value) =>
+  //           {databaseService.userCollection.doc(user.get('userId')).delete()})
+  //       .then((value) => {
+  //             Fluttertoast.showToast(
+  //                 msg: "User deleted successfully",
+  //                 toastLength: Toast.LENGTH_SHORT,
+  //                 gravity: ToastGravity.BOTTOM_RIGHT,
+  //                 timeInSecForIosWeb: 1,
+  //                 backgroundColor: Colors.green,
+  //                 textColor: Colors.white,
+  //                 fontSize: 16.0),
+  //           })
+  //       .catchError((error) => {
+  //             Fluttertoast.showToast(
+  //                 msg: "Failed to delete user",
+  //                 toastLength: Toast.LENGTH_SHORT,
+  //                 gravity: ToastGravity.BOTTOM_RIGHT,
+  //                 timeInSecForIosWeb: 1,
+  //                 backgroundColor: Colors.red,
+  //                 textColor: Colors.white,
+  //                 fontSize: 16.0)
+  //           });
+  // }
 
-  void downloadUserData(var user) {
-    pdfCreator.writeUserDataToPDF(user);
-    pdfCreator
-        .saveUserDataToPDF(user)
-        .then((value) => Fluttertoast.showToast(
-            msg: "PDF saved successfully",
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.BOTTOM_RIGHT,
-            timeInSecForIosWeb: 1,
-            backgroundColor: Colors.green,
-            textColor: Colors.white,
-            fontSize: 16.0))
-        .catchError((error) => Fluttertoast.showToast(
-            msg: "Failed to save PDF",
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.BOTTOM_RIGHT,
-            timeInSecForIosWeb: 1,
-            backgroundColor: Colors.red,
-            textColor: Colors.white,
-            fontSize: 16.0));
-  }
+  // void downloadUserData(var user) {
+  //   pdfCreator.writeUserDataToPDF(user);
+  //   pdfCreator
+  //       .saveUserDataToPDF(user)
+  //       .then((value) => Fluttertoast.showToast(
+  //           msg: "PDF saved successfully",
+  //           toastLength: Toast.LENGTH_SHORT,
+  //           gravity: ToastGravity.BOTTOM_RIGHT,
+  //           timeInSecForIosWeb: 1,
+  //           backgroundColor: Colors.green,
+  //           textColor: Colors.white,
+  //           fontSize: 16.0))
+  //       .catchError((error) => Fluttertoast.showToast(
+  //           msg: "Failed to save PDF",
+  //           toastLength: Toast.LENGTH_SHORT,
+  //           gravity: ToastGravity.BOTTOM_RIGHT,
+  //           timeInSecForIosWeb: 1,
+  //           backgroundColor: Colors.red,
+  //           textColor: Colors.white,
+  //           fontSize: 16.0));
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -234,7 +234,7 @@ class ProfileViewState extends State<ProfileView> {
                               ElevatedButton(
                                   style: raisedButtonStyle,
                                   onPressed: () {
-                                    downloadUserData(user);
+                                   // downloadUserData(user);
                                   },
                                   child: Wrap(
                                     crossAxisAlignment:
@@ -264,7 +264,7 @@ class ProfileViewState extends State<ProfileView> {
                                           TextButton(
                                             onPressed: () => {
                                               Navigator.pop(context, 'Delete'),
-                                              deleteUser(user)
+                                              //deleteUser(user)
                                             },
                                             child: const Text('Delete'),
                                           ),

@@ -1,4 +1,5 @@
 import 'package:clinico/services/database.dart';
+import 'package:clinico/services/pdfCreator.dart';
 import 'package:clinico/style/colors.dart';
 import 'package:flutter/material.dart';
 
@@ -8,14 +9,31 @@ class Details extends StatelessWidget {
       this.doctor,
       this.dateWithHours,
       this.prescriptionExist,
+      this.prescription_id,
       this.appointment_id,
       this.done})
       : super(key: key);
   final String doctor;
   final String dateWithHours;
+  final String prescription_id;
   final bool prescriptionExist;
   final bool done;
   final String appointment_id;
+
+  void downloadPrescriptionAsPdf() {
+    PdfCreator pdfCreator = new PdfCreator();
+
+    DatabaseService()
+        .prescriptionCollection
+        .where('prescription_id', isEqualTo: prescription_id)
+        .snapshots()
+        .first
+        .then((prescription) => {
+              pdfCreator.writePrescriptionToPDF(prescription.docs.first),
+              pdfCreator.savePrescriptionToPDF(prescription.docs.first)
+            });
+  }
+
   @override
   Widget build(BuildContext context) {
     var onlyDate = dateWithHours.split(" ");
@@ -149,7 +167,9 @@ class Details extends StatelessWidget {
                                   style: TextStyle(
                                       color: Colors.white, fontSize: 24),
                                 ),
-                                onPressed: () {},
+                                onPressed: () {
+                                  downloadPrescriptionAsPdf();
+                                },
                               ),
                             ],
                           ),

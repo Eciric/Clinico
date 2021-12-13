@@ -61,7 +61,13 @@ class PdfCreator {
                   children: <pw.Widget>[
                     pw.Text('Prescription data', textScaleFactor: 2),
                   ])),
-          // Add prescription data here
+          pw.Header(level: 1, text: 'PrescriptionId'),
+          pw.Paragraph(
+              text: '${prescription.get('prescription_id').toString()}'),
+          pw.Header(level: 1, text: 'Diagnosis'),
+          pw.Paragraph(text: '${prescription.get('diagnosis').toString()}'),
+          pw.Header(level: 1, text: 'Description'),
+          pw.Paragraph(text: '${prescription.get('description').toString()}'),
         ];
       },
     ));
@@ -71,7 +77,7 @@ class PdfCreator {
     Directory documentDirectory = await getApplicationDocumentsDirectory();
     String documentPath = documentDirectory.path;
     File file = File(
-        "${documentPath}/${prescription.get('prescription_id').toString()}.pdf"); //
+        "${documentPath}/prescription_${prescription.get('prescription_id').toString()}.pdf"); //
     file.writeAsBytesSync(await pdf.save());
   }
 }

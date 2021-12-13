@@ -169,6 +169,8 @@ class Appointments extends StatelessWidget {
                                                     dateWithHours: dateDisplay,
                                                     prescriptionExist:
                                                         prescriptionExist,
+                                                    prescription_id: document[
+                                                        'prescription_id'],
                                                     appointment_id: document[
                                                         'appointment_id'],
                                                     done: document['done'])),

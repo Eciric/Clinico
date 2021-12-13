@@ -37,20 +37,21 @@ class DatabaseService {
     });
   }
 
-  Future updateDoctorPermissions(String role,String doctorid) async {
+  Future updateDoctorPermissions(String role, String doctorid) async {
     return await userCollection.doc(uid).update({
       'role': role,
-      'doctor_id':doctorid,
+      'doctor_id': doctorid,
     });
   }
 
-  Future updateDoctorPermissions2(String doctorid,String name, String phonenumber, List<String> specid,String surname) async {
+  Future updateDoctorPermissions2(String doctorid, String name,
+      String phonenumber, List<String> specid, String surname) async {
     return await doctorsCollection.doc(uid).set({
-      'doctor_id':doctorid,
-      'name' : name,
-      'phoneNumber' :phonenumber,
-      'specid' : specid,
-      'surname' : surname,
+      'doctorId': doctorid,
+      'name': name,
+      'phoneNumber': phonenumber,
+      'specid': specid,
+      'surname': surname,
     });
   }
 

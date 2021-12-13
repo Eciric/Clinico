@@ -10,7 +10,8 @@ class TakeCategory extends StatefulWidget {
   String name;
   String surname;
   String phonenumber;
-  TakeCategory({this.userid,this.role,this.name,this.surname,this.phonenumber});
+  TakeCategory(
+      {this.userid, this.role, this.name, this.surname, this.phonenumber});
   @override
   _TakeCategoryState createState() => _TakeCategoryState();
 }
@@ -37,7 +38,13 @@ class _TakeCategoryState extends State<TakeCategory> {
           actions: [
             TextButton(
                 onPressed: () async {
-                  updateDoctorperrmision(widget.userid,widget.role,widget.name,categories,widget.phonenumber,widget.surname);
+                  updateDoctorperrmision(
+                      widget.userid,
+                      widget.role,
+                      widget.name,
+                      categories,
+                      widget.surname,
+                      widget.phonenumber);
                   Navigator.pop(context);
                 },
                 child: Text(
@@ -78,11 +85,13 @@ class _TakeCategoryState extends State<TakeCategory> {
     );
   }
 
-    updateDoctorperrmision(String userid,String role,String name,List<String>specid,String surname,String phonenumber)async{
-      await DatabaseService(uid: userid).updateDoctorPermissions(role=='doctor' ? 'user' : 'doctor', userid);
-      await DatabaseService(uid: userid).updateDoctorPermissions2(userid ,name, phonenumber, specid, surname);
+  updateDoctorperrmision(String userid, String role, String name,
+      List<String> specid, String surname, String phonenumber) async {
+    await DatabaseService(uid: userid)
+        .updateDoctorPermissions(role == 'doctor' ? 'user' : 'doctor', userid);
+    await DatabaseService(uid: userid)
+        .updateDoctorPermissions2(userid, name, phonenumber, specid, surname);
   }
-  
 }
 
 class Category extends StatefulWidget {
@@ -137,10 +146,9 @@ class _CategoryState extends State<Category> {
                         activeColor: Color.fromRGBO(32, 125, 96, 1),
                         value: widget.state ?? true,
                         onChanged: (bool val) {
-                          if(widget.category.contains(widget.specid))
-                          {
+                          if (widget.category.contains(widget.specid)) {
                             widget.category.remove(widget.specid);
-                          }else{
+                          } else {
                             widget.category.add(widget.specid);
                           }
                           setState(() {

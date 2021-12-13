@@ -43,7 +43,7 @@ class _DoctorAppointmentsState extends State<DoctorAppointments> {
                   child: CircularProgressIndicator(),
                 );
               }
-              final query = snapshot.data[0];
+              final query = snapshot.data;
               print(query);
               return StreamBuilder(
                   stream: DatabaseService()

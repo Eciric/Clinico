@@ -5,7 +5,6 @@ import 'package:clinico/screens/doctor/doctor_lobby.dart';
 import 'package:clinico/screens/home/homePage.dart';
 import 'package:clinico/screens/home/signOutMock.dart';
 import 'package:clinico/services/auth.dart';
-import 'package:clinico/screens/settings/settings.dart';
 import 'package:clinico/services/database.dart';
 import 'package:clinico/style/colors.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -24,7 +23,6 @@ class _HomeState extends State<Home> {
   List _screens = [
     SignOutMock(),
     HomePage(),
-    SettingsView(),
   ];
 
   List<BottomNavigationBarItem> _navItems = [
@@ -35,10 +33,6 @@ class _HomeState extends State<Home> {
     BottomNavigationBarItem(
       label: "Home",
       icon: Icon(Icons.home),
-    ),
-    BottomNavigationBarItem(
-      label: "Settings",
-      icon: Icon(Icons.settings),
     ),
   ];
 
@@ -63,9 +57,9 @@ class _HomeState extends State<Home> {
                     _screens.add(DoctorLobby());
                   }),
                 },
-              if(user.docs.first.get('isAdmin') == true)
-              {
-                setState(() {
+              if (user.docs.first.get('isAdmin') == true)
+                {
+                  setState(() {
                     _navItems.add(
                       BottomNavigationBarItem(
                         label: "Admin panel",
@@ -74,7 +68,7 @@ class _HomeState extends State<Home> {
                     );
                     _screens.add(AdminPanel());
                   }),
-              }
+                }
             });
   }
 
